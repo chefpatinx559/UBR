@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Témoignages - UBR</title>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .star-rating {
+            display: inline-flex;
+            font-size: 1.5rem;
+            color: #d1d5db;
+        }
+        .star-rating .star {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .star-rating .star.active {
+            color: #f59e0b;
+        }
+        .star-rating .star:hover {
+            color: #f59e0b;
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-divine rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-800">UBR</span>
+                    </a>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="discover.html" class="text-gray-600 hover:text-primary transition">Découvrir</a>
+                    <a href="matches.html" class="text-gray-600 hover:text-primary transition">Matches</a>
+                    <a href="messages.html" class="text-gray-600 hover:text-primary transition">Messages</a>
+                    <a href="profile.html" class="text-gray-600 hover:text-primary transition">Profil</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="settings.html" class="text-gray-600 hover:text-primary transition">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                    <a href="notifications.html" class="text-gray-600 hover:text-primary transition">
+                        <i class="fas fa-bell"></i>
+                    </a>
+                    <a href="profile.html" class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                        <img src="../assets/images/profile-placeholder.jpg" alt="Profile" class="w-full h-full object-cover">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-2xl font-bold text-gray-900">Témoignages</h1>
+                <button id="add-testimonial-btn" class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition flex items-center">
+                    <i class="fas fa-plus mr-2"></i>
+                    Ajouter un témoignage
+                </button>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Total témoignages</p>
+                            <h2 class="text-3xl font-bold text-gray-900">124</h2>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-comment-dots text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Note moyenne</p>
+                            <h2 class="text-3xl font-bold text-gray-900">4.7</h2>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center">
+                            <i class="fas fa-star text-yellow-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Témoignages positifs</p>
+                            <h2 class="text-3xl font-bold text-gray-900">112</h2>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-thumbs-up text-green-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Ce mois</p>
+                            <h2 class="text-3xl font-bold text-gray-900">18</h2>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                            <i class="fas fa-calendar-alt text-purple-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filters -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
+                    <div class="flex flex-wrap gap-2">
+                        <button class="filter-btn active-filter px-4 py-2 rounded-full bg-primary text-white" data-filter="all">Tous</button>
+                        <button class="filter-btn px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition" data-filter="positive">Positifs (4-5★)</button>
+                        <button class="filter-btn px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition" data-filter="neutral">Neutres (3★)</button>
+                        <button class="filter-btn px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition" data-filter="negative">Négatifs (1-2★)</button>
+                    </div>
+                    <div class="relative w-full md:w-64">
+                        <input type="text" id="search-testimonials" placeholder="Rechercher un témoignage" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials List -->
+            <div class="space-y-6" id="testimonials-list">
+                <!-- Testimonial Item -->
+                <div class="testimonial-item bg-white rounded-xl shadow-sm p-6" data-rating="5">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden mr-4">
+                            <img src="../assets/images/profile-1.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900">Marie Koné</h3>
+                                    <p class="text-sm text-gray-500">Il y a 2 semaines</p>
+                                </div>
+                                <div class="star-rating mt-2 md:mt-0">
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">J'ai rencontré mon fiancé sur UBR il y a un an ! La plateforme nous a permis de nous connecter grâce à notre foi commune. Les fonctionnalités de filtrage par dénomination et niveau d'engagement spirituel ont vraiment fait la différence. Merci UBR pour cette belle rencontre qui a changé ma vie !</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Item -->
+                <div class="testimonial-item bg-white rounded-xl shadow-sm p-6" data-rating="4">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden mr-4">
+                            <img src="../assets/images/profile-2.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900">Jean Dupont</h3>
+                                    <p class="text-sm text-gray-500">Il y a 1 mois</p>
+                                </div>
+                                <div class="star-rating mt-2 md:mt-0">
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star"><i class="fas fa-star"></i></span>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">UBR offre une expérience unique pour les chrétiens célibataires. J'apprécie particulièrement les événements communautaires organisés et la possibilité de rencontrer des personnes partageant les mêmes valeurs. L'interface est intuitive et les profils sont détaillés. Je retire une étoile car j'aimerais plus d'options de filtrage, mais dans l'ensemble c'est excellent !</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Item -->
+                <div class="testimonial-item bg-white rounded-xl shadow-sm p-6" data-rating="3">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden mr-4">
+                            <img src="../assets/images/profile-3.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900">Paul Kouassi</h3>
+                                    <p class="text-sm text-gray-500">Il y a 2 mois</p>
+                                </div>
+                                <div class="star-rating mt-2 md:mt-0">
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star"><i class="fas fa-star"></i></span>
+                                    <span class="star"><i class="fas fa-star"></i></span>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">UBR a un bon concept, mais l'application pourrait être améliorée. J'ai eu quelques conversations intéressantes, mais je trouve que la base d'utilisateurs est encore limitée dans ma région. J'espère que cela s'améliorera avec le temps. Le service client est réactif quand j'ai signalé quelques bugs.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Item -->
+                <div class="testimonial-item bg-white rounded-xl shadow-sm p-6" data-rating="5">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden mr-4">
+                            <img src="../assets/images/profile-4.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900">Sophie Traoré</h3>
+                                    <p class="text-sm text-gray-500">Il y a 3 mois</p>
+                                </div>
+                                <div class="star-rating mt-2 md:mt-0">
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">En tant que chrétienne engagée, j'ai toujours trouvé difficile de rencontrer quelqu'un qui partage ma foi et mes valeurs. UBR a changé cela ! J'ai pu connecter avec plusieurs personnes intéressantes et j'ai même commencé une relation sérieuse. L'accent mis sur la spiritualité et les valeurs chrétiennes fait toute la différence.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Item -->
+                <div class="testimonial-item bg-white rounded-xl shadow-sm p-6" data-rating="2">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden mr-4">
+                            <img src="../assets/images/profile-5.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900">Michel Bamba</h3>
+                                    <p class="text-sm text-gray-500">Il y a 4 mois</p>
+                                </div>
+                                <div class="star-rating mt-2 md:mt-0">
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star active"><i class="fas fa-star"></i></span>
+                                    <span class="star"><i class="fas fa-star"></i></span>
+                                    <span class="star"><i class="fas fa-star"></i></span>
+                                    <span class="star"><i class="fas fa-star"></i></span>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">J'ai eu quelques problèmes techniques avec l'application et le système de messagerie est parfois lent. De plus, j'ai remarqué quelques faux profils. J'espère que l'équipe travaille à améliorer ces aspects car le concept est bon. Pour l'instant, mon expérience a été mitigée.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="flex justify-center mt-8">
+                <nav class="inline-flex rounded-md shadow-sm">
+                    <a href="#" class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-primary text-white">1</a>
+                    <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50">2</a>
+                    <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50">3</a>
+                    <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50">4</a>
+                    <a href="#" class="px-3 py-2 border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50">5</a>
+                    <a href="#" class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-50">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Testimonial Modal -->
+    <div id="testimonial-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-lg mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-900">Ajouter un témoignage</h2>
+                <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="testimonial-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Votre note</label>
+                    <div class="star-rating" id="rating-stars">
+                        <span class="star" data-value="1"><i class="fas fa-star"></i></span>
+                        <span class="star" data-value="2"><i class="fas fa-star"></i></span>
+                        <span class="star" data-value="3"><i class="fas fa-star"></i></span>
+                        <span class="star" data-value="4"><i class="fas fa-star"></i></span>
+                        <span class="star" data-value="5"><i class="fas fa-star"></i></span>
+                    </div>
+                    <p id="rating-message" class="text-sm text-gray-500 mt-1">Sélectionnez une note</p>
+                </div>
+                
+                <div>
+                    <label for="testimonial-text" class="block text-sm font-medium text-gray-700 mb-1">Votre témoignage</label>
+                    <textarea id="testimonial-text" name="testimonial" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" maxlength="500" placeholder="Partagez votre expérience avec UBR..."></textarea>
+                    <div class="flex justify-end mt-1">
+                        <span class="text-xs text-gray-500"><span id="char-count">0</span>/500 caractères</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" id="anonymous" name="anonymous" class="form-checkbox text-primary">
+                    <label for="anonymous" class="ml-2 text-sm text-gray-700">Publier anonymement</label>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button type="submit" class="bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition flex items-center">
+                        <span>Publier</span>
+                        <i class="fas fa-paper-plane ml-2"></i>
+                        <span class="loading-spinner hidden ml-2"><i class="fas fa-circle-notch fa-spin"></i></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 transform translate-y-10 opacity-0 transition-all duration-300 z-50 max-w-md hidden">
+        <div class="flex items-center">
+            <div id="notification-icon" class="w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                <i class="fas"></i>
+            </div>
+            <div class="flex-1">
+                <h4 id="notification-title" class="font-semibold text-gray-900"></h4>
+                <p id="notification-message" class="text-sm text-gray-600"></p>
+            </div>
+            <button id="close-notification" class="text-gray-400 hover:text-gray-600 ml-4">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modules JavaScript -->
+    <script src="../assets/js/modules/utils.js"></script>
+    <script src="../assets/js/modules/forms.js"></script>
+    <script src="../assets/js/modules/testimonials.js"></script>
+    
+    <!-- Initialisation de l'application -->
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

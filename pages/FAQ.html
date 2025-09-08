@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UBR - Union Bénie et Réelle | Site de Rencontre Chrétienne</title>
+  <link rel="stylesheet" href="../assets/css/output.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<!-- FAQ -->
+<div id="faq" class="page-content">
+    <div class="bg-white rounded-2xl shadow-lg p-8 max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+            <i class="fas fa-question-circle text-6xl text-accent mb-4"></i>
+            <h1 class="font-poppins text-4xl font-bold text-gray-800">Questions fréquentes</h1>
+            <p class="text-xl text-gray-600 mt-4">Trouvez rapidement les réponses à vos questions</p>
+        </div>
+
+        <div class="space-y-6">
+            <!-- Question 1 -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl">
+                <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(1)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-poppins text-lg font-semibold text-gray-800">Comment puis-je m'inscrire sur UBR ?</h3>
+                        <i class="fas fa-chevron-down text-primary transform transition-transform" id="icon-1"></i>
+                    </div>
+                </button>
+                <div class="faq-answer hidden p-6 pt-0" id="answer-1">
+                    <p class="text-gray-700">L'inscription sur UBR est simple et gratuite. Cliquez sur "S'inscrire", remplissez le formulaire avec vos informations personnelles, vos photos et vos préférences. Notre équipe vérifiera votre profil sous 24-48h pour garantir l'authenticité de notre communauté.</p>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl">
+                <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(2)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-poppins text-lg font-semibold text-gray-800">Quels sont les tarifs d'abonnement ?</h3>
+                        <i class="fas fa-chevron-down text-secondary transform transition-transform" id="icon-2"></i>
+                    </div>
+                </button>
+                <div class="faq-answer hidden p-6 pt-0" id="answer-2">
+                    <div class="text-gray-700">
+                        <p class="mb-3">Nos formules d'abonnement :</p>
+                        <ul class="list-disc ml-6 space-y-1">
+                            <li><strong>Mensuel :</strong> 10000 f cfa</li>
+                            <li><strong>Trimestriel :</strong> 25000 f cfa</li>
+                            <li><strong>Semestriel :</strong> 45000 f cfa</li>
+                        </ul>
+                        <p class="mt-3">Tous les abonnements incluent l'accès complet à la plateforme et l'accompagnement personnalisé.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-2xl">
+                <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(3)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-poppins text-lg font-semibold text-gray-800">Comment fonctionne la vérification des profils ?</h3>
+                        <i class="fas fa-chevron-down text-accent transform transition-transform" id="icon-3"></i>
+                    </div>
+                </button>
+                <div class="faq-answer hidden p-6 pt-0" id="answer-3">
+                    <p class="text-gray-700">Notre équipe vérifie manuellement chaque profil : pièce d'identité, photos récentes, cohérence des informations. Nous vérifions aussi l'engagement chrétien via un questionnaire approfondi. Cette démarche garantit l'authenticité et la sécurité de notre communauté.</p>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="bg-gradient-to-r from-purple-50 to-violet-50 rounded-2xl">
+                <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(4)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-poppins text-lg font-semibold text-gray-800">Puis-je annuler mon abonnement à tout moment ?</h3>
+                        <i class="fas fa-chevron-down text-divine transform transition-transform" id="icon-4"></i>
+                    </div>
+                </button>
+                <div class="faq-answer hidden p-6 pt-0" id="answer-4">
+                    <p class="text-gray-700">Oui, vous pouvez annuler votre abonnement à tout moment depuis votre espace personnel. L'annulation prend effet à la fin de la période payée. Aucune résiliation automatique : vous gardez le contrôle total de votre abonnement.</p>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="bg-gradient-to-r from-pink-50 to-rose-50 rounded-2xl">
+                <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(5)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-poppins text-lg font-semibold text-gray-800">Comment supprimer mon profil définitivement ?</h3>
+                        <i class="fas fa-chevron-down text-pink-500 transform transition-transform" id="icon-5"></i>
+                    </div>
+                </button>
+                <div class="faq-answer hidden p-6 pt-0" id="answer-5">
+                    <p class="text-gray-700">Vous pouvez supprimer votre profil à tout moment depuis les paramètres de votre compte. La suppression est immédiate et définitive. Toutes vos données personnelles sont effacées de nos serveurs sous 30 jours conformément au RGPD.</p>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-2xl">
+                <button class="faq-question w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(6)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-poppins text-lg font-semibold text-gray-800">Que faire si je rencontre un profil suspect ?</h3>
+                        <i class="fas fa-chevron-down text-teal-500 transform transition-transform" id="icon-6"></i>
+                    </div>
+                </button>
+                <div class="faq-answer hidden p-6 pt-0" id="answer-6">
+                    <p class="text-gray-700">Signalez immédiatement tout profil ou comportement suspect via le bouton "Signaler" présent sur chaque profil. Notre équipe de modération examine tous les signalements sous 2 heures et prend les mesures appropriées (avertissement, suspension, exclusion).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 bg-gray-50 rounded-2xl p-8 text-center">
+            <h3 class="font-poppins text-xl font-bold text-gray-800 mb-4">Vous ne trouvez pas votre réponse ?</h3>
+            <p class="text-gray-600 mb-6">Notre équipe support est disponible pour répondre à toutes vos questions spécifiques.</p>
+            <a href="mailto:support@ubr-rencontres.com" class="bg-primary hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
+                <i class="fas fa-envelope mr-2"></i>Contacter le support
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    function toggleFAQ(id) {
+        const answer = document.getElementById(`answer-${id}`);
+        const icon = document.getElementById(`icon-${id}`);
+
+        // Toggle display
+        answer.classList.toggle("hidden");
+
+        // Rotate icon
+        icon.classList.toggle("rotate-180");
+    }
+</script>
+

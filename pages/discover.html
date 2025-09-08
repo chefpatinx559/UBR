@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Découvrir des Profils - UBR</title>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .profile-card {
+            transition: all 0.3s ease;
+        }
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .like-animation {
+            animation: likePulse 0.6s ease-in-out;
+        }
+        @keyframes likePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .dislike-animation {
+            animation: dislikePulse 0.6s ease-in-out;
+        }
+        @keyframes dislikePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-divine rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-white"></i>
+                        </div>
+                        <div>
+                            <h1 class="font-poppins font-bold text-xl text-gray-800">UBR</h1>
+                            <p class="text-xs text-gray-600">Union Bénie et Réelle</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-6">
+                    <a href="discover.html" class="text-primary font-medium">Découvrir</a>
+                    <a href="matches.html" class="text-gray-600 hover:text-primary transition duration-300">Mes Matches</a>
+                    <a href="messages.html" class="text-gray-600 hover:text-primary transition duration-300">Messages</a>
+                    <a href="profile.html" class="text-gray-600 hover:text-primary transition duration-300">Mon Profil</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="text-gray-600 hover:text-primary transition duration-300">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://via.placeholder.com/40" alt="Photo de profil" class="w-8 h-8 rounded-full">
+                        <span class="text-gray-700 font-medium">Marie K.</span>
+                        <button class="text-gray-600 hover:text-primary">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- publicite et prédication sur le mariage -->
+
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div class="flex items-center space-x-4">
+                <h2 class="text-2xl font-bold text-gray-800">Zone de publicité sur le mariage chrétien</h2>
+            </div>
+        </div>
+        <p class="mt-4 text-gray-700">Les rencontres passionnées et les prédications sur le mariage. Découvrez des ressources pour construire une relation solide basée sur des valeurs chrétiennes.</p>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Filtres et Recherche -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex items-center space-x-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Découvrir des Profils</h2>
+                    <span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">247 profils disponibles</span>
+                </div>
+                
+                <div class="flex flex-wrap gap-3">
+                    <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option>Tous les âges</option>
+                        <option>20-25 ans</option>
+                        <option>26-30 ans</option>
+                        <option>31-35 ans</option>
+                        <option>36-40 ans</option>
+                        <option>40+ ans</option>
+                    </select>
+                    
+                    <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option>Toutes les villes</option>
+                        <option>Abidjan</option>
+                        <option>Bouaké</option>
+                        <option>Yamoussoukro</option>
+                        <option>San Pedro</option>
+                    </select>
+                    
+                    <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option>Toutes les dénominations</option>
+                        <option>Catholique</option>
+                        <option>Protestant</option>
+                        <option>Évangélique</option>
+                        <option>Pentecôtiste</option>
+                    </select>
+                    
+                    <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                        <i class="fas fa-filter mr-2"></i>Filtrer
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grille de Profils -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Profil 1 -->
+            <div class="profile-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" data-profile-id="1001">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/300x400/667eea/ffffff?text=Sarah+M" alt="Sarah M" class="w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        <i class="fas fa-check-circle mr-1"></i>Vérifié
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                        <i class="fas fa-clock mr-1"></i>En ligne
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Sarah M.</h3>
+                        <span class="text-gray-600">25 ans</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>Abidjan
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Catholique
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Infirmière
+                        </p>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Je cherche un homme de Dieu pour construire une famille chrétienne. J'aime la lecture biblique et le service à l'église..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="dislikeProfile(this)">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="likeProfile(this)">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profil 2 -->
+            <div class="profile-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" data-profile-id="1002">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/300x400/10b981/ffffff?text=Grace+K" alt="Grace K" class="w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        <i class="fas fa-check-circle mr-1"></i>Vérifié
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Grace K.</h3>
+                        <span class="text-gray-600">28 ans</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>Bouaké
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Protestante
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Enseignante
+                        </p>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Passionnée par l'éducation et la musique chrétienne. Je cherche un partenaire spirituel pour une relation sérieuse..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="dislikeProfile(this)">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="likeProfile(this)">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profil 3 -->
+            <div class="profile-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" data-profile-id="1003">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/300x400/f59e0b/ffffff?text=Marie+L" alt="Marie L" class="w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        <i class="fas fa-check-circle mr-1"></i>Vérifié
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                        <i class="fas fa-clock mr-1"></i>En ligne
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Marie L.</h3>
+                        <span class="text-gray-600">26 ans</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>Yamoussoukro
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Évangélique
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Architecte
+                        </p>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Créative et passionnée par l'art. Je cherche un homme de foi pour partager une vie de couple équilibrée..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="dislikeProfile(this)">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="likeProfile(this)">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profil 4 -->
+            <div class="profile-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" data-profile-id="1004">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/300x400/7c3aed/ffffff?text=Anne+P" alt="Anne P" class="w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        <i class="fas fa-check-circle mr-1"></i>Vérifié
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Anne P.</h3>
+                        <span class="text-gray-600">24 ans</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>San Pedro
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Pentecôtiste
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Médecin
+                        </p>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Dévouée à la médecine et à ma foi. Je cherche un partenaire qui partage mes valeurs chrétiennes..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="dislikeProfile(this)">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="likeProfile(this)">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profil 5 -->
+            <div class="profile-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/300x400/ef4444/ffffff?text=Fatou+D" alt="Fatou D" class="w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        <i class="fas fa-check-circle mr-1"></i>Vérifié
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                        <i class="fas fa-clock mr-1"></i>En ligne
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Fatou D.</h3>
+                        <span class="text-gray-600">27 ans</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>Abidjan
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Catholique
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Avocate
+                        </p>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Passionnée par la justice et les droits humains. Je cherche un homme de Dieu pour une relation sérieuse..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="dislikeProfile(this)">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="likeProfile(this)">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profil 6 -->
+            <div class="profile-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/300x400/8b5cf6/ffffff?text=Claire+M" alt="Claire M" class="w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                        <i class="fas fa-check-circle mr-1"></i>Vérifié
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Claire M.</h3>
+                        <span class="text-gray-600">29 ans</span>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>Bouaké
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Protestante
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Psychologue
+                        </p>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Spécialisée en thérapie familiale. Je cherche un partenaire pour construire une famille équilibrée..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="dislikeProfile(this)">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="likeProfile(this)">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-12">
+            <nav class="flex items-center space-x-2">
+                <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="px-3 py-2 bg-primary text-white rounded-lg">1</button>
+                <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">2</button>
+                <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">3</button>
+                <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">4</button>
+                <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Importer le script de découverte -->
+    <script src="../assets/js/discover.js"></script>
+</body>
+</html>

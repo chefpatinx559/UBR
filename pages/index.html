@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UBR - Union Bénie et Réelle | Site de Rencontre Chrétienne</title>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .hero-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        /* Animations de scroll */
+        .scroll-animate {
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in-up {
+            transform: translateY(60px);
+        }
+
+        .fade-in-down {
+            transform: translateY(-60px);
+        }
+
+        .fade-in-left {
+            transform: translateX(-60px);
+        }
+
+        .fade-in-right {
+            transform: translateX(60px);
+        }
+
+        .scale-in {
+            transform: scale(0.8);
+        }
+
+        .rotate-in {
+            transform: rotate(-10deg) scale(0.8);
+        }
+
+        .slide-in-bottom {
+            transform: translateY(100px);
+        }
+
+        .animate-visible {
+            opacity: 1;
+            transform: translateY(0) translateX(0) scale(1) rotate(0);
+        }
+
+        /* Animation staggered pour les grilles */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* Animation du header au scroll */
+        .header-scrolled {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animation des statistiques */
+        .counter-animate {
+            font-variant-numeric: tabular-nums;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Animation parallax */
+        .parallax-slow {
+            transform: translateY(var(--scroll-y, 0));
+        }
+
+        /* Hover effects améliorés */
+        .enhanced-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .enhanced-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Animation pour les témoignages */
+        .testimonial-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animation de typewriter pour le titre principal */
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #f59e0b; }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Header -->
+    <header id="header" class="bg-white shadow-lg fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-primary to-divine rounded-full flex items-center justify-center float-animation">
+                        <i class="fas fa-heart text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-poppins font-bold text-2xl text-gray-800">UBR</h1>
+                        <p class="text-xs text-gray-600">Union Bénie et Réelle</p>
+                    </div>
+                </div>
+                
+                <nav class="hidden lg:flex space-x-8">
+                    <a href="#accueil" class="text-gray-700 hover:text-primary transition duration-300">Accueil</a>
+                    <a href="#fonctionnalites" class="text-gray-700 hover:text-primary transition duration-300">Fonctionnalités</a>
+                    <a href="#temoignages" class="text-gray-700 hover:text-primary transition duration-300">Témoignages</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary transition duration-300">Contact</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="login.html" class="text-primary hover:text-primary-dark font-medium transition duration-300">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Connexion
+                    </a>
+                    <a href="register.html" class="bg-primary hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium transition duration-300">
+                        <i class="fas fa-user-plus mr-2"></i>S'inscrire
+                    </a>
+                    <button id="mobileMenu" class="lg:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="relative gradient-bg hero-pattern pt-24 pb-16 min-h-screen flex items-center overflow-hidden">
+        <!-- Overlay sombre -->
+        <div class="absolute inset-0 bg-black/60 z-0"></div>
+        <!-- Image de fond -->
+        <img src="../assets/images/couple.jpeg"
+             alt="Couple heureux"
+             class="absolute inset-0 w-full h-full object-cover z-0 opacity-80 parallax-slow"/>
+        <!-- Overlay sombre -->
+        <div class="absolute inset-0 bg-black/50 z-0"></div>
+        <!-- Contenu -->
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <h1 class="font-poppins text-5xl lg:text-6xl font-bold mb-6 leading-tight scroll-animate fade-in-up">
+                        Trouvez l'âme sœur que <span class="text-accent">Dieu</span> a préparée pour vous
+                    </h1>
+                    <p class="text-xl mb-8 text-blue-100 leading-relaxed scroll-animate fade-in-up stagger-1">
+                        Rejoignez notre communauté de chrétiens célibataires engagés dans leur foi, 
+                        à la recherche d'une relation authentique menant au mariage béni.
+                    </p>
+                    
+                    <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-6 mb-8 scroll-animate fade-in-up stagger-2">
+                        <h3 class="text-accent font-semibold mb-4 flex items-center">
+                            <i class="fas fa-info-circle mr-2"></i>Conditions d'adhésion
+                        </h3>
+                        <ul class="space-y-2 text-blue-100">
+                            <li class="scroll-animate fade-in-left stagger-3"><i class="fas fa-check text-secondary mr-2"></i>Âge minimum : 20 ans</li>
+                            <li class="scroll-animate fade-in-left stagger-4"><i class="fas fa-check text-secondary mr-2"></i>Engagement chrétien sincère</li>
+                            <li class="scroll-animate fade-in-left stagger-5"><i class="fas fa-check text-secondary mr-2"></i>Objectif mariage</li>
+                            <li class="scroll-animate fade-in-left stagger-6"><i class="fas fa-check text-secondary mr-2"></i>Profil vérifié</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 scroll-animate fade-in-up stagger-3">
+                        <a href="buy.html" class="bg-accent hover:bg-yellow-600 text-white px-8 py-4 rounded-full font-semibold text-lg pulse-animation transition duration-300">
+                            <i class="fas fa-heart mr-2"></i>Commencer maintenant
+                        </a>
+                        <button id="howItWorksBtn" class="bg-white hover:bg-blue-50 text-accent px-8 py-4 rounded-full font-semibold text-lg transition duration-300 shadow-md border border-accent">
+                            <i class="fas fa-play-circle mr-2"></i>Voir comment ça marche
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:block">
+                    <div class="relative scroll-animate scale-in stagger-2">
+                        <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-8 transform rotate-3 shadow-2xl float-animation">
+                            <div class="bg-white rounded-2xl p-6 transform -rotate-3">
+                                <div class="text-center mb-6">
+                                    <div class="w-20 h-20 bg-gradient-to-r from-primary to-divine rounded-full mx-auto mb-4 flex items-center justify-center">
+                                        <i class="fas fa-users text-white text-2xl"></i>
+                                    </div>
+                                    <h3 class="font-poppins font-bold text-gray-800 text-xl">Déjà plus de</h3>
+                                    <p class="text-4xl font-bold text-primary counter-animate" id="memberCount">0</p>
+                                    <p class="text-gray-600">membres actifs</p>
+                                </div>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-3 bg-green-50 p-3 rounded-lg">
+                                        <div class="w-3 h-3 bg-secondary rounded-full animate-pulse"></div>
+                                        <span class="text-sm text-gray-700">Sarah et David se sont mariés</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3 bg-blue-50 p-3 rounded-lg">
+                                        <div class="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                                        <span class="text-sm text-gray-700">15 nouveaux couples cette semaine</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center scroll-animate fade-in-up stagger-1 enhanced-hover">
+                    <img src="https://img.icons8.com/color/96/000000/group-foreground-selected.png" alt="Membres" class="mx-auto mb-2 w-16 h-16">
+                    <div class="text-4xl font-bold text-primary mb-2 counter-animate" data-target="2847">0</div>
+                    <p class="text-gray-600">Membres actifs</p>
+                </div>
+                <div class="text-center scroll-animate fade-in-up stagger-2 enhanced-hover">
+                    <img src="https://img.icons8.com/color/96/000000/wedding-rings.png" alt="Mariages" class="mx-auto mb-2 w-16 h-16">
+                    <div class="text-4xl font-bold text-secondary mb-2 counter-animate" data-target="156">0</div>
+                    <p class="text-gray-600">Mariages bénis</p>
+                </div>
+                <div class="text-center scroll-animate fade-in-up stagger-3 enhanced-hover">
+                    <img src="https://img.icons8.com/color/96/000000/like--v3.png" alt="Satisfaction" class="mx-auto mb-2 w-16 h-16">
+                    <div class="text-4xl font-bold text-accent mb-2 counter-animate" data-target="98">0</div>
+                    <p class="text-gray-600">% Satisfaction</p>
+                </div>
+                <div class="text-center scroll-animate fade-in-up stagger-4 enhanced-hover">
+                    <img src="https://img.icons8.com/color/96/000000/online-support.png" alt="Support" class="mx-auto mb-2 w-16 h-16">
+                    <div class="text-4xl font-bold text-divine mb-2">24/7</div>
+                    <p class="text-gray-600">Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="howItWorks" class="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 scroll-animate fade-in-up">
+                <h2 class="font-poppins text-4xl font-bold text-gray-800 mb-4">
+                    Comment ça marche ?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    En seulement 4 étapes simples, trouvez votre âme sœur et construisez une relation bénie
+                </p>
+            </div>
+            
+            <div class="max-w-6xl mx-auto">
+                <!-- Timeline -->
+                <div class="relative">
+                    <!-- Ligne de connexion -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary via-secondary to-accent hidden lg:block"></div>
+                    
+                    <!-- Étape 1 -->
+                    <div class="relative flex flex-col lg:flex-row items-center mb-16 scroll-animate fade-in-left">
+                        <div class="lg:w-1/2 lg:pr-12 mb-8 lg:mb-0">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg enhanced-hover">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-r from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+                                        1
+                                    </div>
+                                    <h3 class="font-poppins font-bold text-2xl text-gray-800">Choisir son abonnement</h3>
+                                </div>
+                                <p class="text-gray-600 text-lg leading-relaxed mb-4">
+                                    Choisissez une formule afin de créer votre profil en quelques minutes. Renseignez vos informations personnelles, vos valeurs chrétiennes et vos attentes pour une relation sérieuse.
+                                </p>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li><i class="fas fa-check text-primary mr-2"></i>Profil détaillé et authentique</li>
+                                    <li><i class="fas fa-check text-primary mr-2"></i>Vérification d'identité sécurisée</li>
+                                    <li><i class="fas fa-check text-primary mr-2"></i>Questions sur votre foi et valeurs</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 lg:pl-12">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=400&fit=crop" alt="Inscription" class="rounded-2xl shadow-lg w-full h-80 object-cover">
+                                <div class="absolute inset-0 bg-primary/20 rounded-2xl"></div>
+                            </div>
+                        </div>
+                        <!-- Numéro de l'étape pour mobile -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold lg:hidden top-0">
+                            1
+                        </div>
+                    </div>
+
+                    <!-- Étape 2 -->
+                    <div class="relative flex flex-col lg:flex-row-reverse items-center mb-16 scroll-animate fade-in-right">
+                        <div class="lg:w-1/2 lg:pl-12 mb-8 lg:mb-0">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg enhanced-hover">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-r from-secondary to-green-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+                                        2
+                                    </div>
+                                    <h3 class="font-poppins font-bold text-2xl text-gray-800">Découverte guidée</h3>
+                                </div>
+                                <p class="text-gray-600 text-lg leading-relaxed mb-4">
+                                    Notre algorithme intelligent vous propose des profils compatibles basés sur vos valeurs, votre foi et vos critères de recherche.
+                                </p>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li><i class="fas fa-check text-secondary mr-2"></i>Suggestions personnalisées quotidiennes</li>
+                                    <li><i class="fas fa-check text-secondary mr-2"></i>Compatibilité spirituelle analysée</li>
+                                    <li><i class="fas fa-check text-secondary mr-2"></i>Filtres avancés par géolocalisation</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 lg:pr-12">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&h=400&fit=crop" alt="Découverte" class="rounded-2xl shadow-lg w-full h-80 object-cover">
+                                <div class="absolute inset-0 bg-secondary/20 rounded-2xl"></div>
+                            </div>
+                        </div>
+                        <!-- Numéro de l'étape pour mobile -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white font-bold lg:hidden top-0">
+                            2
+                        </div>
+                    </div>
+
+                    <!-- Étape 3 -->
+                    <div class="relative flex flex-col lg:flex-row items-center mb-16 scroll-animate fade-in-left">
+                        <div class="lg:w-1/2 lg:pr-12 mb-8 lg:mb-0">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg enhanced-hover">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-r from-accent to-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+                                        3
+                                    </div>
+                                    <h3 class="font-poppins font-bold text-2xl text-gray-800">Échanges authentiques</h3>
+                                </div>
+                                <p class="text-gray-600 text-lg leading-relaxed mb-4">
+                                    Entamez des conversations significatives dans un environnement sécurisé et respectueux, guidé par les valeurs chrétiennes.
+                                </p>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li><i class="fas fa-check text-accent mr-2"></i>Messagerie privée et sécurisée</li>
+                                    <li><i class="fas fa-check text-accent mr-2"></i>Conseils pour bien communiquer</li>
+                                    <li><i class="fas fa-check text-accent mr-2"></i>Modération active 24/7</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 lg:pl-12">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=500&h=400&fit=crop" alt="Échanges" class="rounded-2xl shadow-lg w-full h-80 object-cover">
+                                <div class="absolute inset-0 bg-accent/20 rounded-2xl"></div>
+                            </div>
+                        </div>
+                        <!-- Numéro de l'étape pour mobile -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold lg:hidden top-0">
+                            3
+                        </div>
+                    </div>
+
+                    <!-- Étape 4 -->
+                    <div class="relative flex flex-col lg:flex-row-reverse items-center scroll-animate fade-in-right">
+                        <div class="lg:w-1/2 lg:pl-12 mb-8 lg:mb-0">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg enhanced-hover">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-r from-divine to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+                                        4
+                                    </div>
+                                    <h3 class="font-poppins font-bold text-2xl text-gray-800">Union bénie</h3>
+                                </div>
+                                <p class="text-gray-600 text-lg leading-relaxed mb-4">
+                                    Avec notre accompagnement personnalisé, construisez une relation solide qui mènera au mariage dans la bénédiction de Dieu.
+                                </p>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li><i class="fas fa-check text-divine mr-2"></i>Suivi personnalisé par nos conseillers</li>
+                                    <li><i class="fas fa-check text-divine mr-2"></i>Conseils pour une relation épanouie</li>
+                                    <li><i class="fas fa-check text-divine mr-2"></i>Accompagnement jusqu'au mariage</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 lg:pr-12">
+                            <div class="relative">
+                                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500&h=400&fit=crop" alt="Mariage" class="rounded-2xl shadow-lg w-full h-80 object-cover">
+                                <div class="absolute inset-0 bg-divine/20 rounded-2xl"></div>
+                            </div>
+                        </div>
+                        <!-- Numéro de l'étape pour mobile -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-divine rounded-full flex items-center justify-center text-white font-bold lg:hidden top-0">
+                            4
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="text-center mt-16 scroll-animate fade-in-up">
+                <p class="text-gray-600 mt-4">
+                    <i class="fas fa-shield-alt mr-1"></i>Plateforme 100% sécurisée • <i class="fas fa-users mr-1"></i>Déjà 2,847 membres
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="fonctionnalites" class="bg-gray-50 py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 scroll-animate fade-in-up">
+                <h2 class="font-poppins text-4xl font-bold text-gray-800 mb-4">
+                    Fonctionnalités pensées pour votre bonheur
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Notre plateforme offre tous les outils nécessaires pour une rencontre authentique et sécurisée
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-8 card-hover scroll-animate fade-in-up stagger-1">
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-search text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-poppins font-semibold text-xl mb-4">Recherche avancée</h3>
+                    <p class="text-gray-600">Filtres basés sur la foi, les valeurs, la géolocalisation et les préférences personnelles.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 card-hover scroll-animate fade-in-up stagger-2">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="font-poppins font-semibold text-xl mb-4">Sécurité renforcée</h3>
+                    <p class="text-gray-600">Vérification des profils, modération active et protection des données personnelles.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 card-hover scroll-animate fade-in-up stagger-3">
+                    <div class="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-comments text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-poppins font-semibold text-xl mb-4">Messagerie sécurisée</h3>
+                    <p class="text-gray-600">Discussions privées avec modération automatique et notifications temps réel.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 card-hover scroll-animate fade-in-up stagger-4">
+                    <div class="w-16 h-16 bg-divine/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-heart text-divine text-2xl"></i>
+                    </div>
+                    <h3 class="font-poppins font-semibold text-xl mb-4">Matching intelligent</h3>
+                    <p class="text-gray-600">Algorithme basé sur la compatibilité spirituelle et les valeurs communes.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 card-hover scroll-animate fade-in-up stagger-5">
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-poppins font-semibold text-xl mb-4">App mobile</h3>
+                    <p class="text-gray-600">Interface responsive et application mobile pour rester connecté partout.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 card-hover scroll-animate fade-in-up stagger-6">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="font-poppins font-semibold text-xl mb-4">Suivi personnalisé</h3>
+                    <p class="text-gray-600">Accompagnement par notre équipe jusqu'au mariage avec conseils et prières.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="temoignages" class="bg-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 scroll-animate fade-in-up">
+                <h2 class="font-poppins text-4xl font-bold text-gray-800 mb-4">
+                    Ils ont trouvé l'amour grâce à UBR
+                </h2>
+                <p class="text-xl text-gray-600">Découvrez les témoignages de couples bénis</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card rounded-2xl p-8 enhanced-hover scroll-animate rotate-in stagger-1">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-4">
+                            S&D
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Sarah & David</h4>
+                            <p class="text-sm text-gray-600">Mariés en 2024</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Grâce à UBR, nous avons trouvé bien plus qu'un partenaire, nous avons trouvé notre complément selon le plan de Dieu. Merci pour cette plateforme bénie !"</p>
+                    <div class="flex text-accent mt-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card rounded-2xl p-8 enhanced-hover scroll-animate rotate-in stagger-2">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white font-bold mr-4">
+                            M&P
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Marie & Paul</h4>
+                            <p class="text-sm text-gray-600">En couple depuis 1 an</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"L'algorithme de matching est incroyable ! Nous partageons les mêmes valeurs et la même vision du mariage chrétien. Notre relation grandit dans la foi."</p>
+                    <div class="flex text-accent mt-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card rounded-2xl p-8 enhanced-hover scroll-animate rotate-in stagger-3">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-divine rounded-full flex items-center justify-center text-white font-bold mr-4">
+                            A&J
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Anne & Joseph</h4>
+                            <p class="text-sm text-gray-600">Fiançailles en cours</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Sécurisé, respectueux et efficace. UBR nous a permis de construire notre relation sur de bonnes bases, dans la prière et la patience."</p>
+                    <div class="flex text-accent mt-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-bg py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="font-poppins text-4xl font-bold text-white mb-6 scroll-animate fade-in-up">
+                Prêt(e) à commencer votre histoire d'amour avec UBR ?
+            </h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto scroll-animate fade-in-up stagger-1">
+                Rejoignez des milliers de chrétiens qui font confiance à UBR pour trouver leur âme sœur
+            </p>
+            <a href="buy.html" class="bg-accent hover:bg-yellow-600 text-white px-10 py-4 rounded-full font-semibold text-lg transition duration-300 pulse-animation scroll-animate scale-in stagger-2">
+                <i class="fas fa-user-plus mr-2"></i>Abonnez-vous dès maintenant
+            </a>
+            <p class="text-blue-200 mt-4 text-sm scroll-animate fade-in-up stagger-3">
+                <i class="fas fa-lock mr-1"></i>Inscription 100% sécurisée
+            </p>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="bg-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 scroll-animate fade-in-up">
+                <h2 class="font-poppins text-4xl font-bold text-gray-800 mb-4">
+                    Contactez-nous
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Une question, un besoin d'aide ou un message d'encouragement ? Notre équipe est à votre écoute !
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Formulaire de contact -->
+                <form class="bg-gray-50 rounded-2xl shadow-lg p-8 space-y-6 scroll-animate fade-in-left" id="contactForm">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nom *</label>
+                        <input type="text" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Votre nom" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                        <input type="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="votre@email.com" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                        <textarea name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Votre message..." required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition duration-300">
+                        <i class="fas fa-paper-plane mr-2"></i>Envoyer
+                    </button>
+                </form>
+                <!-- Infos de contact -->
+                <div class="space-y-8 scroll-animate fade-in-right">
+                    <div class="flex items-center space-x-4 scroll-animate fade-in-up stagger-1">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-envelope text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Email</h4>
+                            <a href="mailto:support@ubr-rencontres.com" class="text-primary hover:underline">support@ubr-rencontres.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 scroll-animate fade-in-up stagger-2">
+                        <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-phone text-secondary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Téléphone</h4>
+                            <a href="tel:+22912345678" class="text-secondary hover:underline">+225 07 xx xx xx xx</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 scroll-animate fade-in-up stagger-3">
+                        <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-map-marker-alt text-accent text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Adresse</h4>
+                            <p class="text-gray-600">Bouaké, Côte d'Ivoire</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="scroll-animate fade-in-up stagger-1">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-divine rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-poppins font-bold text-xl">UBR</h3>
+                            <p class="text-xs text-gray-400">Union Bénie et Réelle</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Plateforme de rencontre chrétienne dédiée aux célibataires cherchant une relation sérieuse menant au mariage.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="scroll-animate fade-in-up stagger-2">
+                    <h4 class="font-poppins font-semibold text-lg mb-6">Liens utiles</h4>
+                    <ul class="space-y-3">
+                        <li><a href="how-make.html" class="text-gray-400 hover:text-white transition duration-300">Comment ça marche</a></li>
+                        <li><a href="conseil.html" class="text-gray-400 hover:text-white transition duration-300">Conseils relationnels</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white transition duration-300">Blog</a></li>
+                        <li><a href="temoignages.html" class="text-gray-400 hover:text-white transition duration-300">Témoignages</a></li>
+                    </ul>
+                </div>
+                
+                <div class="scroll-animate fade-in-up stagger-3">
+                    <h4 class="font-poppins font-semibold text-lg mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="centre-aide.html" class="text-gray-400 hover:text-white transition duration-300">Centre d'aide</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition duration-300">Nous contacter</a></li>
+                        <li><a href="FAQ.html" class="text-gray-400 hover:text-white transition duration-300">FAQ</a></li>
+                        <li><a href="signaler.html" class="text-gray-400 hover:text-white transition duration-300">Signaler un problème</a></li>
+                    </ul>
+                </div>
+                
+                <div class="scroll-animate fade-in-up stagger-4">
+                    <h4 class="font-poppins font-semibold text-lg mb-6">Légal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="condition-utilisation.html" class="text-gray-400 hover:text-white transition duration-300">Conditions d'utilisation</a></li>
+                        <li><a href="politique-confid.html" class="text-gray-400 hover:text-white transition duration-300">Politique de confidentialité</a></li>
+                        <li><a href="charte-moderation.html" class="text-gray-400 hover:text-white transition duration-300">Charte de modération</a></li>
+                        <li><a href="mention-legale.html" class="text-gray-400 hover:text-white transition duration-300">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center scroll-animate fade-in-up">
+                <p class="text-gray-400">
+                    © 2025 UBR - Union Bénie et Réelle. Tous droits réservés. 
+                    <span class="text-accent">Fait avec ❤️ pour la communauté chrétienne</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenuOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40 lg:hidden">
+        <div class="fixed right-0 top-0 h-full w-80 bg-white shadow-xl transform transition-transform">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-divine rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-poppins font-bold text-lg">UBR</h3>
+                            <p class="text-xs text-gray-600">Union Bénie et Réelle</p>
+                        </div>
+                    </div>
+                    <button id="closeMobileMenu" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <nav class="space-y-6 mb-8">
+                    <a href="#accueil" class="block text-gray-700 hover:text-primary font-medium">Accueil</a>
+                    <a href="#fonctionnalites" class="block text-gray-700 hover:text-primary font-medium">Fonctionnalités</a>
+                    <a href="#temoignages" class="block text-gray-700 hover:text-primary font-medium">Témoignages</a>
+                    <a href="#contact" class="block text-gray-700 hover:text-primary font-medium">Contact</a>
+                </nav>
+                
+                <!-- <div class="space-y-4">
+                    <button id="mobileLoginBtn" class="w-full text-primary border border-primary hover:bg-primary hover:text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Connexion
+                    </button>
+                    <button id="mobileRegisterBtn" class="w-full bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-user-plus mr-2"></i>S'inscrire
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

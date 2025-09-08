@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - UBR</title>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .notification-item {
+            transition: all 0.3s ease;
+        }
+        .notification-item:hover {
+            background-color: #f8fafc;
+        }
+        .notification-unread {
+            background-color: #eff6ff;
+            border-left: 4px solid #2563eb;
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-divine rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-white"></i>
+                        </div>
+                        <div>
+                            <h1 class="font-poppins font-bold text-xl text-gray-800">UBR</h1>
+                            <p class="text-xs text-gray-600">Union Bénie et Réelle</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition duration-300">Accueil</a>
+                    <a href="matches.html" class="text-gray-600 hover:text-primary transition duration-300">Mes Matches</a>
+                    <a href="messages.html" class="text-gray-600 hover:text-primary transition duration-300">Messages</a>
+                    <a href="profile.html" class="text-gray-600 hover:text-primary transition duration-300">Mon Profil</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="notificationsBtn" class="text-primary font-medium transition duration-300">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://via.placeholder.com/40" alt="Photo de profil" class="w-8 h-8 rounded-full">
+                        <span class="text-gray-700 font-medium">Marie K.</span>
+                        <button class="text-gray-600 hover:text-primary">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header Section -->
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Notifications</h1>
+                    <p class="text-gray-600">Restez informée de toutes vos activités</p>
+                </div>
+                
+                <div class="flex space-x-3">
+                    <button id="markAllRead" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                        <i class="fas fa-check-double mr-2"></i>Tout marquer comme lu
+                    </button>
+                    <button id="clearAll" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition duration-300">
+                        <i class="fas fa-trash mr-2"></i>Tout effacer
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                <div class="flex flex-wrap gap-4">
+                    <button class="filter-btn active px-4 py-2 bg-primary text-white rounded-lg transition duration-300" data-filter="all">
+                        <i class="fas fa-bell mr-2"></i>Toutes (12)
+                    </button>
+                    <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300" data-filter="matches">
+                        <i class="fas fa-heart mr-2"></i>Matches (3)
+                    </button>
+                    <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300" data-filter="messages">
+                        <i class="fas fa-comment mr-2"></i>Messages (5)
+                    </button>
+                    <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300" data-filter="system">
+                        <i class="fas fa-cog mr-2"></i>Système (2)
+                    </button>
+                    <button class="filter-btn px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300" data-filter="spiritual">
+                        <i class="fas fa-cross mr-2"></i>Spirituel (2)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notifications List -->
+            <div class="space-y-4">
+                <!-- Match Notification -->
+                <div class="notification-item notification-unread bg-white rounded-xl shadow-sm border border-gray-200 p-6" data-type="matches">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-gradient-to-r from-pink-400 to-red-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-heart text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Nouveau match !</h3>
+                                    <p class="text-gray-600 mt-1">Vous avez un nouveau match avec <strong>Jean Baptiste</strong>, 28 ans, Abidjan</p>
+                                    <div class="flex items-center space-x-4 mt-3">
+                                        <button class="text-primary hover:text-blue-700 font-medium text-sm">
+                                            <i class="fas fa-eye mr-1"></i>Voir le profil
+                                        </button>
+                                        <button class="text-green-600 hover:text-green-700 font-medium text-sm">
+                                            <i class="fas fa-comment mr-1"></i>Envoyer un message
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-gray-500">Il y a 2h</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message Notification -->
+                <div class="notification-item notification-unread bg-white rounded-xl shadow-sm border border-gray-200 p-6" data-type="messages">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-comment text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Nouveau message</h3>
+                                    <p class="text-gray-600 mt-1"><strong>David K.</strong> vous a envoyé un message : "Bonjour Marie, j'ai aimé votre profil..."</p>
+                                    <div class="flex items-center space-x-4 mt-3">
+                                        <button class="text-primary hover:text-blue-700 font-medium text-sm">
+                                            <i class="fas fa-reply mr-1"></i>Répondre
+                                        </button>
+                                        <button class="text-gray-600 hover:text-gray-700 font-medium text-sm">
+                                            <i class="fas fa-eye mr-1"></i>Voir la conversation
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-gray-500">Il y a 4h</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spiritual Notification -->
+                <div class="notification-item notification-unread bg-white rounded-xl shadow-sm border border-gray-200 p-6" data-type="spiritual">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-teal-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-cross text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Rappel spirituel</h3>
+                                    <p class="text-gray-600 mt-1">N'oubliez pas de prier pour votre relation et de lire votre Bible quotidiennement.</p>
+                                    <div class="flex items-center space-x-4 mt-3">
+                                        <button class="text-primary hover:text-blue-700 font-medium text-sm">
+                                            <i class="fas fa-book-open mr-1"></i>Lire un verset
+                                        </button>
+                                        <button class="text-green-600 hover:text-green-700 font-medium text-sm">
+                                            <i class="fas fa-pray mr-1"></i>Demande de prière
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-gray-500">Il y a 6h</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Notification -->
+                <div class="notification-item bg-white rounded-xl shadow-sm border border-gray-200 p-6" data-type="system">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-cog text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Profil mis à jour</h3>
+                                    <p class="text-gray-600 mt-1">Votre profil a été mis à jour avec succès. Il est maintenant visible par les autres membres.</p>
+                                    <div class="flex items-center space-x-4 mt-3">
+                                        <button class="text-primary hover:text-blue-700 font-medium text-sm">
+                                            <i class="fas fa-eye mr-1"></i>Voir mon profil
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-gray-500">Il y a 1 jour</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Match Notification (Read) -->
+                <div class="notification-item bg-white rounded-xl shadow-sm border border-gray-200 p-6" data-type="matches">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-gradient-to-r from-pink-400 to-red-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-heart text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Match mutuel !</h3>
+                                    <p class="text-gray-600 mt-1">Félicitations ! <strong>Paul M.</strong> vous a aussi likée. C'est un match mutuel !</p>
+                                    <div class="flex items-center space-x-4 mt-3">
+                                        <button class="text-primary hover:text-blue-700 font-medium text-sm">
+                                            <i class="fas fa-eye mr-1"></i>Voir le profil
+                                        </button>
+                                        <button class="text-green-600 hover:text-green-700 font-medium text-sm">
+                                            <i class="fas fa-comment mr-1"></i>Commencer à discuter
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-gray-500">Il y a 2 jours</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message Notification (Read) -->
+                <div class="notification-item bg-white rounded-xl shadow-sm border border-gray-200 p-6" data-type="messages">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-comment text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900">Message lu</h3>
+                                    <p class="text-gray-600 mt-1"><strong>Jean D.</strong> a lu votre message et vous a répondu.</p>
+                                    <div class="flex items-center space-x-4 mt-3">
+                                        <button class="text-primary hover:text-blue-700 font-medium text-sm">
+                                            <i class="fas fa-eye mr-1"></i>Voir la réponse
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-gray-500">Il y a 3 jours</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-8">
+                <button class="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
+                    <i class="fas fa-chevron-down mr-2"></i>Charger plus de notifications
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de gestion des notifications -->
+    <script src="../assets/js/notifications.js"></script>
+</body>
+</html>

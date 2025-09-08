@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de Bord Admin - UBR</title>
+
+  <!-- Ton Tailwind compilé -->
+  <link rel="stylesheet" href="../assets/css/output.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
+        <div class="flex items-center justify-between px-6 py-4">
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-cross text-2xl text-blue-600"></i>
+                <h1 class="text-2xl font-bold text-gray-800">UBR Admin</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Admin Principal</span>
+                </div>
+                <button class="flex items-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex pt-16">
+        <!-- Sidebar -->
+        <nav class="w-64 bg-white shadow-lg min-h-screen fixed left-0 top-16 z-40">
+            <div class="p-6">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#dashboard" class="nav-link active flex items-center space-x-3 p-3 rounded-lg bg-blue-50 text-blue-700">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Tableau de Bord</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#users" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                            <i class="fas fa-users"></i>
+                            <span>Gestion Utilisateurs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#profiles" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                            <i class="fas fa-id-card"></i>
+                            <span>Vérification Profils</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#matches" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                            <i class="fas fa-heart"></i>
+                            <span>Suivi des Rencontres</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#messages" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                            <i class="fas fa-comments"></i>
+                            <span>Modération Messages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#reports" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                            <i class="fas fa-flag"></i>
+                            <span>Signalements</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#statistics" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Statistiques</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#settings" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 text-gray-700">
+                            <i class="fas fa-cog"></i>
+                            <span>Paramètres</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 ml-64">
+            <!-- Dashboard Overview -->
+            <div id="dashboard-content" class="content-section">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Utilisateurs Actifs</p>
+                                <p class="text-3xl font-bold text-gray-900">1,247</p>
+                                <p class="text-green-600 text-sm mt-1">
+                                    <i class="fas fa-arrow-up"></i> +12% ce mois
+                                </p>
+                            </div>
+                            <div class="p-3 bg-blue-100 rounded-full">
+                                <i class="fas fa-users text-blue-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Mariages Réalisés</p>
+                                <p class="text-3xl font-bold text-gray-900">34</p>
+                                <p class="text-green-600 text-sm mt-1">
+                                    <i class="fas fa-arrow-up"></i> +3 ce mois
+                                </p>
+                            </div>
+                            <div class="p-3 bg-pink-100 rounded-full">
+                                <i class="fas fa-ring text-pink-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Profils en Attente</p>
+                                <p class="text-3xl font-bold text-gray-900">23</p>
+                                <p class="text-orange-600 text-sm mt-1">
+                                    <i class="fas fa-clock"></i> À vérifier
+                                </p>
+                            </div>
+                            <div class="p-3 bg-orange-100 rounded-full">
+                                <i class="fas fa-user-clock text-orange-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Signalements</p>
+                                <p class="text-3xl font-bold text-gray-900">5</p>
+                                <p class="text-red-600 text-sm mt-1">
+                                    <i class="fas fa-exclamation-triangle"></i> Urgent
+                                </p>
+                            </div>
+                            <div class="p-3 bg-red-100 rounded-full">
+                                <i class="fas fa-flag text-red-600 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Inscriptions par Mois</h3>
+                        <canvas id="registrationsChart" height="200"></canvas>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Répartition par Âge</h3>
+                        <canvas id="ageChart" height="200"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Activities -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800">Activités Récentes</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4 p-4 bg-green-50 rounded-lg">
+                                <div class="p-2 bg-green-100 rounded-full">
+                                    <i class="fas fa-heart text-green-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900">Nouveau mariage confirmé</p>
+                                    <p class="text-sm text-gray-600">Marie D. et Jean K. se sont mariés le 28/07/2025</p>
+                                </div>
+                                <span class="text-xs text-gray-500">Il y a 2h</span>
+                            </div>
+
+                            <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-lg">
+                                <div class="p-2 bg-blue-100 rounded-full">
+                                    <i class="fas fa-user-plus text-blue-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900">Nouveau profil vérifié</p>
+                                    <p class="text-sm text-gray-600">Sarah M., 25 ans, Abidjan - Profil approuvé</p>
+                                </div>
+                                <span class="text-xs text-gray-500">Il y a 4h</span>
+                            </div>
+
+                            <div class="flex items-center space-x-4 p-4 bg-red-50 rounded-lg">
+                                <div class="p-2 bg-red-100 rounded-full">
+                                    <i class="fas fa-ban text-red-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-900">Utilisateur suspendu</p>
+                                    <p class="text-sm text-gray-600">Profil suspect - Comportement inapproprié signalé</p>
+                                </div>
+                                <span class="text-xs text-gray-500">Il y a 6h</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Management -->
+            <div id="users-content" class="content-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Gestion des Utilisateurs</h2>
+                    <div class="flex space-x-4">
+                        <input type="search" placeholder="Rechercher un utilisateur..." class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option>Tous les statuts</option>
+                            <option>Actif</option>
+                            <option>Suspendu</option>
+                            <option>En attente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Utilisateur</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Âge</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ville</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Inscription</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/40" alt="">
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Marie Kouassi</div>
+                                            <div class="text-sm text-gray-500">marie.k@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">28 ans</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Abidjan</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Actif</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">15/07/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-900">Voir</button>
+                                    <button class="text-yellow-600 hover:text-yellow-900">Suspendre</button>
+                                    <button class="text-red-600 hover:text-red-900">Supprimer</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/40" alt="">
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Jean Baptiste</div>
+                                            <div class="text-sm text-gray-500">jean.b@email.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">32 ans</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Bouaké</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">En attente</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">20/07/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                    <button class="text-blue-600 hover:text-blue-900">Voir</button>
+                                    <button class="text-green-600 hover:text-green-900">Approuver</button>
+                                    <button class="text-red-600 hover:text-red-900">Refuser</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Profile Verification -->
+            <div id="profiles-content" class="content-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Vérification des Profils</h2>
+                    <div class="bg-orange-100 text-orange-800 px-4 py-2 rounded-lg">
+                        <i class="fas fa-clock mr-2"></i>
+                        23 profils en attente de vérification
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Profil en Attente</h3>
+                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">En attente</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <img src="https://via.placeholder.com/80" alt="Photo de profil" class="w-20 h-20 rounded-full">
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Sarah Mensah</h4>
+                                    <p class="text-gray-600">25 ans, Yamoussoukro</p>
+                                    <p class="text-sm text-gray-500">Inscrite le 03/08/2025</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Photos uploadées:</span>
+                                    <span class="text-green-600">✓ 3 photos</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Informations complètes:</span>
+                                    <span class="text-green-600">✓ Oui</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Âge vérifié (20+):</span>
+                                    <span class="text-green-600">✓ Oui</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Engagement chrétien:</span>
+                                    <span class="text-green-600">✓ Confirmé</span>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t">
+                                <p class="text-sm text-gray-600 mb-3">
+                                    <strong>Description:</strong> "Je cherche un homme de Dieu pour construire une famille chrétienne. J'aime la lecture biblique et le service à l'église..."
+                                </p>
+                                
+                                <div class="flex space-x-3">
+                                    <button class="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition">
+                                        <i class="fas fa-check mr-2"></i>Approuver
+                                    </button>
+                                    <button class="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition">
+                                        <i class="fas fa-times mr-2"></i>Refuser
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Critères de Vérification</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="p-4 bg-blue-50 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">✓ Critères Obligatoires</h4>
+                                <ul class="text-sm text-blue-700 space-y-1">
+                                    <li>• Âge minimum: 20 ans</li>
+                                    <li>• Photos de profil authentiques</li>
+                                    <li>• Informations personnelles complètes</li>
+                                    <li>• Engagement chrétien déclaré</li>
+                                    <li>• Intention de mariage sérieuse</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-4 bg-red-50 rounded-lg">
+                                <h4 class="font-semibold text-red-800 mb-2">✗ Motifs de Refus</h4>
+                                <ul class="text-sm text-red-700 space-y-1">
+                                    <li>• Âge inférieur à 20 ans</li>
+                                    <li>• Photos inappropriées ou fausses</li>
+                                    <li>• Informations incomplètes</li>
+                                    <li>• Comportement non sérieux</li>
+                                    <li>• Profil déjà existant</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marriage Tracking -->
+            <div id="matches-content" class="content-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Suivi des Rencontres et Mariages</h2>
+                    <div class="bg-green-100 text-green-800 px-4 py-2 rounded-lg">
+                        <i class="fas fa-heart mr-2"></i>
+                        34 mariages réalisés cette année
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Étapes de Suivi</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                <span class="text-sm">Match Initial (125)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <span class="text-sm">Communication (89)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+                                <span class="text-sm">Rencontre Physique (45)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+                                <span class="text-sm">Fiançailles (23)</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <span class="text-sm">Mariage (34)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Taux de Réussite</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">Match → Communication</span>
+                                    <span class="text-sm font-medium">71%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 71%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">Communication → Rencontre</span>
+                                    <span class="text-sm font-medium">51%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-600 h-2 rounded-full" style="width: 51%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">Rencontre → Mariage</span>
+                                    <span class="text-sm font-medium">76%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-600 h-2 rounded-full" style="width: 76%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Mariages Récents</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
+                                <i class="fas fa-ring text-green-600"></i>
+                                <div class="text-sm">
+                                    <p class="font-medium">Marie & Jean</p>
+                                    <p class="text-gray-600">28 Juillet 2025</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
+                                <i class="fas fa-ring text-green-600"></i>
+                                <div class="text-sm">
+                                    <p class="font-medium">Sarah & David</p>
+                                    <p class="text-gray-600">15 Juillet 2025</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
+                                <i class="fas fa-ring text-green-600"></i>
+                                <div class="text-sm">
+                                    <p class="font-medium">Grace & Paul</p>
+                                    <p class="text-gray-600">02 Juillet 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Couples Tracking Table -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800">Suivi des Couples Actifs</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Couple</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Étape Actuelle</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Durée</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dernière Activité</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="flex -space-x-2">
+                                                <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/32" alt="">
+                                                <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/32" alt="">
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-900">Aya & Kofi</p>
+                                                <p class="text-sm text-gray-500">24 ans & 28 ans</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-pink-100 text-pink-800">Fiançailles</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">3 mois</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Il y a 2 jours</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-blue-600 hover:text-blue-900 mr-3">Suivre</button>
+                                        <button class="text-green-600 hover:text-green-900">Contacter</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="flex -space-x-2">
+                                                <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/32" alt="">
+                                                <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/32" alt="">
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-900">Fatou & Ibrahim</p>
+                                                <p class="text-sm text-gray-500">26 ans & 30 ans</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-orange-100 text-orange-800">Rencontre Physique</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1 mois</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Il y a 1 jour</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-blue-600 hover:text-blue-900 mr-3">Suivre</button>
+                                        <button class="text-green-600 hover:text-green-900">Contacter</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages Moderation Section -->
+            <div id="messages-content" class="content-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Modération des Messages</h2>
+                    <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg">
+                        <i class="fas fa-comments mr-2"></i>
+                        12 messages en attente de modération
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Statistiques Messages</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Messages aujourd'hui</span>
+                                <span class="font-semibold text-blue-600">1,247</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">En attente</span>
+                                <span class="font-semibold text-orange-600">12</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Signalés</span>
+                                <span class="font-semibold text-red-600">3</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Approuvés</span>
+                                <span class="font-semibold text-green-600">1,234</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Filtres Rapides</h3>
+                        <div class="space-y-3">
+                            <button class="w-full text-left p-3 bg-red-50 hover:bg-red-100 rounded-lg transition" data-filter="inappropriate">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-red-700 font-medium">Inappropriés</span>
+                                    <span class="bg-red-600 text-white px-2 py-1 rounded-full text-xs">3</span>
+                                </div>
+                            </button>
+                            <button class="w-full text-left p-3 bg-yellow-50 hover:bg-yellow-100 rounded-lg transition" data-filter="spam">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-yellow-700 font-medium">Spam</span>
+                                    <span class="bg-yellow-600 text-white px-2 py-1 rounded-full text-xs">5</span>
+                                </div>
+                            </button>
+                            <button class="w-full text-left p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition" data-filter="pending">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-blue-700 font-medium">En attente</span>
+                                    <span class="bg-blue-600 text-white px-2 py-1 rounded-full text-xs">12</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Actions Rapides</h3>
+                        <div class="space-y-3">
+                            <button class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition flex items-center justify-center">
+                                <i class="fas fa-check mr-2"></i>Approuver Tout
+                            </button>
+                            <button class="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition flex items-center justify-center">
+                                <i class="fas fa-ban mr-2"></i>Rejeter Tout
+                            </button>
+                            <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center">
+                                <i class="fas fa-download mr-2"></i>Exporter Logs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages List -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Messages en Attente</h3>
+                            <div class="flex space-x-2">
+                                <select class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                    <option>Tous les messages</option>
+                                    <option>Inappropriés</option>
+                                    <option>Spam</option>
+                                    <option>Harcèlement</option>
+                                </select>
+                                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm">
+                                    <i class="fas fa-sync mr-1"></i>Actualiser
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <div class="p-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <img src="https://via.placeholder.com/40" alt="Avatar" class="w-10 h-10 rounded-full">
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900">Marie K. → Jean D.</h4>
+                                            <p class="text-sm text-gray-500">Il y a 2h</p>
+                                        </div>
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800">Inapproprié</span>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">"Salut chéri, tu veux qu'on se voit ce soir ? Je peux venir chez toi..."</p>
+                                    <div class="flex space-x-3">
+                                        <button class="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition">
+                                            <i class="fas fa-check mr-1"></i>Approuver
+                                        </button>
+                                        <button class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition">
+                                            <i class="fas fa-ban mr-1"></i>Rejeter
+                                        </button>
+                                        <button class="px-3 py-1 bg-yellow-600 text-white text-sm rounded hover:bg-yellow-700 transition">
+                                            <i class="fas fa-exclamation-triangle mr-1"></i>Signaler
+                                        </button>
+                                        <button class="px-3 py-1 bg-gray-600 text-white text-sm rounded hover:bg-gray-700 transition">
+                                            <i class="fas fa-eye mr-1"></i>Voir Profil
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <img src="https://via.placeholder.com/40" alt="Avatar" class="w-10 h-10 rounded-full">
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900">Paul M. → Sarah L.</h4>
+                                            <p class="text-sm text-gray-500">Il y a 4h</p>
+                                        </div>
+                                        <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">Spam</span>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">"Bonjour ! Je vends des produits de beauté. Voulez-vous essayer ? Prix réduits !"</p>
+                                    <div class="flex space-x-3">
+                                        <button class="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition">
+                                            <i class="fas fa-check mr-1"></i>Approuver
+                                        </button>
+                                        <button class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition">
+                                            <i class="fas fa-ban mr-1"></i>Rejeter
+                                        </button>
+                                        <button class="px-3 py-1 bg-yellow-600 text-white text-sm rounded hover:bg-yellow-700 transition">
+                                            <i class="fas fa-exclamation-triangle mr-1"></i>Signaler
+                                        </button>
+                                        <button class="px-3 py-1 bg-gray-600 text-white text-sm rounded hover:bg-gray-700 transition">
+                                            <i class="fas fa-eye mr-1"></i>Voir Profil
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports-content" class="content-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Signalements</h2>
+                    <div class="bg-red-100 text-red-800 px-4 py-2 rounded-lg">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        5 signalements urgents
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div class="p-6 border-b border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Signalements en Attente</h3>
+                            <select class="px-4 py-2 border border-gray-300 rounded-lg">
+                                <option>Tous les signalements</option>
+                                <option>Comportement inapproprié</option>
+                                <option>Faux profil</option>
+                                <option>Spam/Harcèlement</option>
+                                <option>Contenu inapproprié</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        <div class="p-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="p-2 bg-red-100 rounded-full">
+                                    <i class="fas fa-flag text-red-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900">Comportement inapproprié</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Signalé par: Marie K. contre Jean D.</p>
+                                            <p class="text-sm text-gray-500 mt-2">"Messages à caractère non chrétien, propositions déplacées malgré mes refus répétés."</p>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Il y a 2h</span>
+                                    </div>
+                                    <div class="flex space-x-3 mt-4">
+                                        <button class="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700">
+                                            Examiner
+                                        </button>
+                                        <button class="px-4 py-2 bg-yellow-600 text-white text-sm rounded-lg hover:bg-yellow-700">
+                                            Avertir Utilisateur
+                                        </button>
+                                        <button class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700">
+                                            Suspendre
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="p-2 bg-orange-100 rounded-full">
+                                    <i class="fas fa-user-times text-orange-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900">Suspicion de faux profil</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Signalé par: Équipe de modération</p>
+                                            <p class="text-sm text-gray-500 mt-2">Photos suspectes, informations incohérentes, comportement automatisé détecté.</p>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Il y a 4h</span>
+                                    </div>
+                                    <div class="flex space-x-3 mt-4">
+                                        <button class="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700">
+                                            Vérifier Identité
+                                        </button>
+                                        <button class="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700">
+                                            Supprimer Profil
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div id="statistics-content" class="content-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Statistiques Détaillées</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Évolution des Inscriptions</h3>
+                        <canvas id="monthlyStatsChart" height="200"></canvas>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Répartition Géographique</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Abidjan</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 45%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium">562</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Bouaké</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-600 h-2 rounded-full" style="width: 25%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium">312</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Yamoussoukro</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-600 h-2 rounded-full" style="width: 15%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium">187</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">San Pedro</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-yellow-600 h-2 rounded-full" style="width: 10%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium">124</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Autres</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-gray-600 h-2 rounded-full" style="width: 5%"></div>
+                                    </div>
+                                    <span class="text-sm font-medium">62</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Activité par Jour</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Lundi</span>
+                                <span class="text-sm font-medium">156 connexions</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Mardi</span>
+                                <span class="text-sm font-medium">142 connexions</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Mercredi</span>
+                                <span class="text-sm font-medium">189 connexions</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Jeudi</span>
+                                <span class="text-sm font-medium">167 connexions</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Vendredi</span>
+                                <span class="text-sm font-medium">198 connexions</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Samedi</span>
+                                <span class="text-sm font-medium">234 connexions</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Dimanche</span>
+                                <span class="text-sm font-medium">287 connexions</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Temps de Réponse Moyen</h3>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">2h 45min</div>
+                            <p class="text-gray-600 text-sm">Temps moyen de réponse aux messages</p>
+                        </div>
+                        <div class="mt-4 space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">< 1h</span>
+                                <span class="text-sm font-medium">23%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">1-4h</span>
+                                <span class="text-sm font-medium">45%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">4-24h</span>
+                                <span class="text-sm font-medium">28%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">> 24h</span>
+                                <span class="text-sm font-medium">4%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Taux de Conversion</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">Inscription → Profil complet</span>
+                                    <span class="text-sm font-medium">87%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-600 h-2 rounded-full" style="width: 87%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">Profil → Premier match</span>
+                                    <span class="text-sm font-medium">64%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 64%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">Match → Conversation</span>
+                                    <span class="text-sm font-medium">71%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-600 h-2 rounded-full" style="width: 71%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings-content" class="content-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Paramètres du Site</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Règles d'Adhésion</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Âge minimum</label>
+                                <input type="number" value="20" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                <p class="text-xs text-gray-500 mt-1">Âge minimum requis pour s'inscrire</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Durée de validation des profils</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <option>24 heures</option>
+                                    <option selected>48 heures</option>
+                                    <option>72 heures</option>
+                                    <option>1 semaine</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" id="auto-suspend" checked class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="auto-suspend" class="text-sm text-gray-700">Suspension automatique après 3 signalements</label>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" id="photo-required" checked class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="photo-required" class="text-sm text-gray-700">Photo de profil obligatoire</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Notifications</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-900">Nouveaux signalements</p>
+                                    <p class="text-sm text-gray-600">Recevoir une notification pour chaque nouveau signalement</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-900">Nouveaux mariages</p>
+                                    <p class="text-sm text-gray-600">Notification quand un couple annonce son mariage</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-900">Profils en attente</p>
+                                    <p class="text-sm text-gray-600">Alerte quotidienne des profils à valider</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Maintenance</h3>
+                        <div class="space-y-4">
+                            <button class="w-full flex items-center justify-center space-x-2 bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition">
+                                <i class="fas fa-download"></i>
+                                <span>Exporter les Données</span>
+                            </button>
+                            <button class="w-full flex items-center justify-center space-x-2 bg-yellow-600 text-white py-3 px-4 rounded-lg hover:bg-yellow-700 transition">
+                                <i class="fas fa-broom"></i>
+                                <span>Nettoyer les Profils Inactifs</span>
+                            </button>
+                            <button class="w-full flex items-center justify-center space-x-2 bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition">
+                                <i class="fas fa-sync"></i>
+                                <span>Synchroniser les Données</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Informations du Site</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Version:</span>
+                                <span class="font-medium">UBR v2.1.0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Dernière mise à jour:</span>
+                                <span class="font-medium">01/08/2025</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Base de données:</span>
+                                <span class="font-medium text-green-600">Opérationnelle</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Serveur:</span>
+                                <span class="font-medium text-green-600">En ligne</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">SSL:</span>
+                                <span class="font-medium text-green-600">Actif</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-red-50 border border-red-200 rounded-xl p-6">
+                    <h3 class="text-lg font-semibold text-red-800 mb-4">Zone de Danger</h3>
+                    <p class="text-red-700 mb-4">Les actions suivantes sont irréversibles et peuvent affecter le fonctionnement du site.</p>
+                    <div class="flex space-x-4">
+                        <button class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                            Réinitialiser les Statistiques
+                        </button>
+                        <button class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                            Mode Maintenance
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Ajoute ces éléments où tu veux afficher les stats -->
+    <div>
+      <span>Utilisateurs : <span id="user-count">-</span></span><br>
+      <span>Messages : <span id="message-count">-</span></span><br>
+      <span>Matchs : <span id="match-count">-</span></span>
+    </div>
+
+    <!-- Ajoutez ceci dans la section où vous voulez afficher le chargement -->
+    <div id="loading-indicator" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-xl">
+            <div class="flex items-center space-x-4">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                <span class="text-gray-700">Chargement des utilisateurs...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modules JS pour admin.html -->
+    <script src="../assets/js/modules/utils.js"></script>
+    <script src="../assets/js/modules/user-management.js"></script>
+    <script src="../assets/js/modules/reports.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', fetchAdminStats);
+    </script>
+</body>
+</html>

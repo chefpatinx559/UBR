@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paramètres du Compte - UBR</title>
+
+  <!-- Tailwind CSS compilé -->
+  <link rel="stylesheet" href="../assets/css/output.css">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body class="font-inter bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-divine rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-white"></i>
+                        </div>
+                        <div>
+                            <h1 class="font-poppins font-bold text-xl text-gray-800">UBR</h1>
+                            <p class="text-xs text-gray-600">Union Bénie et Réelle</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-primary transition duration-300">Accueil</a>
+                    <a href="matches.html" class="text-gray-600 hover:text-primary transition duration-300">Mes Matches</a>
+                    <a href="messages.html" class="text-gray-600 hover:text-primary transition duration-300">Messages</a>
+                    <a href="profile.html" class="text-gray-600 hover:text-primary transition duration-300">Mon Profil</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="notificationsBtn" class="text-gray-600 hover:text-primary transition duration-300">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://via.placeholder.com/40" alt="Photo de profil" class="w-8 h-8 rounded-full">
+                        <span class="text-gray-700 font-medium">Marie K.</span>
+                        <button class="text-gray-600 hover:text-primary">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header Section -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Paramètres du Compte</h1>
+                <p class="text-gray-600">Gérez vos préférences et la sécurité de votre compte</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Sidebar Navigation -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <nav class="space-y-2">
+                            <button class="settings-nav-btn active w-full text-left px-4 py-3 rounded-lg bg-primary text-white font-medium" data-section="profile">
+                                <i class="fas fa-user mr-3"></i>Informations du profil
+                            </button>
+                            <button class="settings-nav-btn w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 font-medium" data-section="security">
+                                <i class="fas fa-shield-alt mr-3"></i>Sécurité
+                            </button>
+                            <button class="settings-nav-btn w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 font-medium" data-section="privacy">
+                                <i class="fas fa-lock mr-3"></i>Confidentialité
+                            </button>
+                            <button class="settings-nav-btn w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 font-medium" data-section="notifications">
+                                <i class="fas fa-bell mr-3"></i>Notifications
+                            </button>
+                            <button class="settings-nav-btn w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 font-medium" data-section="preferences">
+                                <i class="fas fa-cog mr-3"></i>Préférences
+                            </button>
+                            <button class="settings-nav-btn w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 font-medium" data-section="billing">
+                                <i class="fas fa-credit-card mr-3"></i>Facturation
+                            </button>
+                            <button class="settings-nav-btn w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 font-medium" data-section="data">
+                                <i class="fas fa-database mr-3"></i>Mes données
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Profile Information Section -->
+                    <div id="profile-section" class="settings-section">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-6">Informations du Profil</h2>
+                            
+                            <div class="space-y-6">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
+                                        <input type="text" value="Marie" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Nom</label>
+                                        <input type="text" value="Kouassi" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                    <input type="email" value="marie.kouassi@email.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
+                                    <input type="tel" value="+225 07 12 34 56 78" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Date de naissance</label>
+                                    <input type="date" value="1997-05-15" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                                
+                                <div class="flex justify-end">
+                                    <button class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                                        <i class="fas fa-save mr-2"></i>Enregistrer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Section -->
+                    <div id="security-section" class="settings-section hidden">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-6">Sécurité</h2>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="font-medium text-gray-900 mb-4">Changer le mot de passe</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe actuel</label>
+                                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Nouveau mot de passe</label>
+                                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Confirmer le nouveau mot de passe</label>
+                                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        </div>
+                                        <button class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                                            <i class="fas fa-key mr-2"></i>Changer le mot de passe
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="border-t pt-6">
+                                    <h3 class="font-medium text-gray-900 mb-4">Authentification à deux facteurs</h3>
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-sm text-gray-600">Ajouter une couche de sécurité supplémentaire</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" class="sr-only peer">
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="border-t pt-6">
+                                    <h3 class="font-medium text-gray-900 mb-4">Sessions actives</h3>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                            <div>
+                                                <p class="font-medium text-gray-900">Chrome sur Windows</p>
+                                                <p class="text-sm text-gray-600">Dernière activité : Il y a 2h</p>
+                                            </div>
+                                            <button class="text-red-600 hover:text-red-700 text-sm">Déconnecter</button>
+                                        </div>
+                                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                            <div>
+                                                <p class="font-medium text-gray-900">Safari sur iPhone</p>
+                                                <p class="text-sm text-gray-600">Dernière activité : Il y a 1 jour</p>
+                                            </div>
+                                            <button class="text-red-600 hover:text-red-700 text-sm">Déconnecter</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Section -->
+                    <div id="privacy-section" class="settings-section hidden">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-6">Confidentialité</h2>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Profil visible</h3>
+                                        <p class="text-sm text-gray-600">Permettre aux autres de voir votre profil</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Messages de personnes non matchées</h3>
+                                        <p class="text-sm text-gray-600">Autoriser les messages de personnes que vous n'avez pas likées</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Statut en ligne</h3>
+                                        <p class="text-sm text-gray-600">Afficher votre statut de connexion</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Historique de navigation</h3>
+                                        <p class="text-sm text-gray-600">Permettre à UBR de collecter des données d'utilisation</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Section -->
+                    <div id="notifications-section" class="settings-section hidden">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-6">Notifications</h2>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Nouveaux matches</h3>
+                                        <p class="text-sm text-gray-600">Recevoir des notifications pour les nouveaux matches</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Nouveaux messages</h3>
+                                        <p class="text-sm text-gray-600">Recevoir des notifications pour les nouveaux messages</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Rappels spirituels</h3>
+                                        <p class="text-sm text-gray-600">Recevoir des rappels de prière et versets bibliques</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Notifications par email</h3>
+                                        <p class="text-sm text-gray-600">Recevoir des notifications par email</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Notifications push</h3>
+                                        <p class="text-sm text-gray-600">Recevoir des notifications push sur mobile</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preferences Section -->
+                    <div id="preferences-section" class="settings-section hidden">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-6">Préférences</h2>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Langue</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option value="fr" selected>Français</option>
+                                        <option value="en">English</option>
+                                        <option value="es">Español</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Fuseau horaire</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option value="africa/abidjan" selected>Afrique/Abidjan (GMT+0)</option>
+                                        <option value="africa/lagos">Afrique/Lagos (GMT+1)</option>
+                                        <option value="europe/paris">Europe/Paris (GMT+1/+2)</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Thème</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                        <option value="light" selected>Clair</option>
+                                        <option value="dark">Sombre</option>
+                                        <option value="auto">Automatique</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Mode sombre</h3>
+                                        <p class="text-sm text-gray-600">Activer le thème sombre</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Billing Section -->
+                    <div id="billing-section" class="settings-section hidden">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-6">Facturation</h2>
+                            
+                            <div class="space-y-6">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <h3 class="font-medium text-blue-900 mb-2">Plan actuel : Gratuit</h3>
+                                    <p class="text-sm text-blue-700">Vous utilisez actuellement le plan gratuit d'UBR.</p>
+                                </div>
+                                
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div class="border border-gray-200 rounded-lg p-4">
+                                        <h4 class="font-medium text-gray-900 mb-2">Plan Premium</h4>
+                                        <p class="text-2xl font-bold text-primary mb-2">9,99€/mois</p>
+                                        <ul class="text-sm text-gray-600 space-y-1 mb-4">
+                                            <li>• Voir qui vous a likée</li>
+                                            <li>• Messages illimités</li>
+                                            <li>• Profils détaillés</li>
+                                            <li>• Annuler les likes</li>
+                                        </ul>
+                                        <button class="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                                            Passer au Premium
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="border border-gray-200 rounded-lg p-4">
+                                        <h4 class="font-medium text-gray-900 mb-2">Plan Plus</h4>
+                                        <p class="text-2xl font-bold text-primary mb-2">4,99€/mois</p>
+                                        <ul class="text-sm text-gray-600 space-y-1 mb-4">
+                                            <li>• 5 super likes par jour</li>
+                                            <li>• Revenir en arrière</li>
+                                            <li>• Profils étendus</li>
+                                            <li>• Pas de publicités</li>
+                                        </ul>
+                                        <button class="w-full px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition duration-300">
+                                            Passer au Plus
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Section -->
+                    <div id="data-section" class="settings-section hidden">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-6">Mes Données</h2>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Télécharger mes données</h3>
+                                        <p class="text-sm text-gray-600">Obtenir une copie de toutes vos données personnelles</p>
+                                    </div>
+                                    <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                                        <i class="fas fa-download mr-2"></i>Télécharger
+                                    </button>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">Supprimer mon compte</h3>
+                                        <p class="text-sm text-gray-600">Supprimer définitivement votre compte et toutes vos données</p>
+                                    </div>
+                                    <button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300">
+                                        <i class="fas fa-trash mr-2"></i>Supprimer
+                                    </button>
+                                </div>
+                                
+                                <div class="border-t pt-6">
+                                    <h3 class="font-medium text-gray-900 mb-4">Informations sur les données</h3>
+                                    <div class="text-sm text-gray-600 space-y-2">
+                                        <p>• Vos données sont stockées de manière sécurisée en Europe</p>
+                                        <p>• Vous pouvez demander la suppression de vos données à tout moment</p>
+                                        <p>• Nous ne vendons jamais vos données personnelles</p>
+                                        <p>• Vous avez le droit de rectifier vos données</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de paramètres du compte -->
+    <script src="../assets/js/account-settings.js"></script>
+</body>
+</html>

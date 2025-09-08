@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signaler un Problème - UBR | Union Bénie et Réelle</title>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        }
+        
+        .report-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .animate-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+        
+.urgency-indicator {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .security-badge {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-primary to-divine rounded-full flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-poppins font-bold text-2xl text-gray-800">UBR</h1>
+                        <p class="text-xs text-gray-600">Union Bénie et Réelle</p>
+                    </div>
+                </div>
+                
+                <nav class="hidden lg:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition duration-300">Accueil</a>
+                    <a href="temoignages.html" class="text-gray-700 hover:text-primary transition duration-300">Témoignages</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-primary transition duration-300">Contact</a>
+                    <a href="signaler.html" class="text-red-500 font-medium">Signaler</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="login.html" class="text-primary hover:text-primary-dark font-medium transition duration-300">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Connexion
+                    </a>
+                    <a href="register.html" class="bg-primary hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium transition duration-300">
+                        <i class="fas fa-user-plus mr-2"></i>S'inscrire
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div class="security-badge w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 scroll-animate">
+                    <i class="fas fa-shield-alt text-white text-3xl"></i>
+                </div>
+                <h1 class="font-poppins text-5xl font-bold text-white mb-6 scroll-animate stagger-1">
+                    Signaler un problème
+                </h1>
+                <p class="text-xl text-red-100 mb-8 scroll-animate stagger-2">
+                    Votre sécurité est notre priorité absolue. Signalez-nous tout comportement inapproprié ou problème rencontré sur la plateforme.
+                </p>
+                <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto scroll-animate stagger-3">
+                    <div class="flex items-center justify-center mb-4">
+                        <i class="fas fa-lock text-yellow-300 text-2xl mr-3"></i>
+                        <h3 class="text-white font-semibold text-lg">100% Confidentiel</h3>
+                    </div>
+                    <p class="text-red-100 text-sm">
+                        Tous les signalements sont traités dans la plus stricte confidentialité par notre équipe de modération spécialisée.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Report Types -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 scroll-animate">
+                <h2 class="font-poppins text-3xl font-bold text-gray-800 mb-4">
+                    Types de signalements fréquents
+                </h2>
+                <p class="text-gray-600">Cliquez sur votre situation pour pré-remplir le formulaire</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <button onclick="preSelectReport('harassment')" class="report-card rounded-xl p-6 text-center hover:border-red-300 transition-all scroll-animate stagger-1">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-times text-red-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Harcèlement</h3>
+                    <p class="text-sm text-gray-600">Messages inappropriés, insistance excessive</p>
+                </button>
+                
+                <button onclick="preSelectReport('fake_profile')" class="report-card rounded-xl p-6 text-center hover:border-red-300 transition-all scroll-animate stagger-2">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mask text-orange-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Faux profil</h3>
+                    <p class="text-sm text-gray-600">Photos volées, informations mensongères</p>
+                </button>
+                
+                <button onclick="preSelectReport('scam')" class="report-card rounded-xl p-6 text-center hover:border-red-300 transition-all scroll-animate stagger-3">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-money-bill-wave text-yellow-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Arnaque</h3>
+                    <p class="text-sm text-gray-600">Demande d'argent, chantage financier</p>
+                </button>
+                
+                <button onclick="preSelectReport('inappropriate_content')" class="report-card rounded-xl p-6 text-center hover:border-red-300 transition-all scroll-animate stagger-4">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-eye-slash text-purple-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mb-2">Contenu inapproprié</h3>
+                    <p class="text-sm text-gray-600">Photos, messages non conformes</p>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Form Section -->
+    <section class="bg-gray-50 py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12 scroll-animate">
+                    <h2 class="font-poppins text-4xl font-bold text-gray-800 mb-4">
+                        Formulaire de signalement
+                    </h2>
+                    <p class="text-xl text-gray-600">
+                        Plus vous donnez de détails, plus nous pourrons traiter efficacement votre signalement
+                    </p>
+                </div>
+                
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Formulaire principal -->
+                    <div class="lg:col-span-2">
+                        <div class="report-card rounded-2xl p-8 scroll-animate stagger-1">
+                            <form id="reportForm" class="space-y-6">
+                                <!-- Informations de base -->
+                                <div class="border-b pb-6">
+                                    <h3 class="font-semibold text-lg text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-user text-primary mr-2"></i>
+                                        Vos informations
+                                    </h3>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Votre email *</label>
+                                            <input type="email" name="reporterEmail" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="votre@email.com" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Votre nom d'utilisateur (optionnel)</label>
+                                            <input type="text" name="reporterUsername" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Votre pseudo sur UBR">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Type de problème -->
+                                <div class="border-b pb-6">
+                                    <h3 class="font-semibold text-lg text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
+                                        Nature du problème
+                                    </h3>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Type de problème *</label>
+                                            <select name="reportType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" required>
+                                                <option value="">Sélectionnez le type</option>
+                                                <option value="harassment">Harcèlement</option>
+                                                <option value="fake_profile">Faux profil</option>
+                                                <option value="inappropriate_content">Contenu inapproprié</option>
+                                                <option value="scam">Arnaque/Escroquerie</option>
+                                                <option value="spam">Spam</option>
+                                                <option value="violence">Menaces/Violence</option>
+                                                <option value="technical">Problème technique</option>
+                                                <option value="other">Autre</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Niveau d'urgence *</label>
+                                            <select name="urgency" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" required>
+                                                <option value="low">Faible - Traitement sous 72h</option>
+                                                <option value="medium">Moyenne - Traitement sous 24h</option>
+                                                <option value="high">Urgente - Traitement immédiat</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Utilisateur concerné -->
+                                <div class="border-b pb-6">
+                                    <h3 class="font-semibold text-lg text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-search text-accent mr-2"></i>
+                                        Utilisateur concerné
+                                    </h3>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Nom d'utilisateur</label>
+                                            <input type="text" name="reportedUser" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Pseudo de l'utilisateur">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">ID du profil (si connu)</label>
+                                            <input type="text" name="reportedUserId" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="ID#12345">
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Lien vers le profil (optionnel)</label>
+                                        <input type="url" name="profileUrl" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="https://ubr.com/profil/...">
+                                    </div>
+                                </div>
+                                
+                                <!-- Description détaillée -->
+                                <div>
+                                    <h3 class="font-semibold text-lg text-gray-800 mb-4 flex items-center">
+                                        <i class="fas fa-file-alt text-secondary mr-2"></i>
+                                        Description détaillée
+                                    </h3>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Décrivez le problème *</label>
+                                        <textarea name="reportDescription" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Décrivez précisément ce qui s'est passé : dates, heures, captures d'écran, messages reçus, etc. Plus vous donnez de détails, mieux nous pourrons vous aider." required maxlength="2000"></textarea>
+                                        <div class="text-sm text-gray-500 mt-1 text-right">0/2000</div>
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Preuves (captures d'écran, liens, etc.)</label>
+                                        <textarea name="evidence" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Décrivez les preuves que vous avez ou collez les liens vers les captures d'écran..." maxlength="500"></textarea>
+                                        <div class="text-sm text-gray-500 mt-1 text-right">0/500</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Informations importantes -->
+                                <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-info-circle text-red-500 mt-1 mr-3"></i>
+                                        <div class="text-sm text-gray-700">
+                                            <p class="font-medium mb-2">Que se passe-t-il après votre signalement ?</p>
+                                            <ul class="list-disc list-inside space-y-1">
+                                                <li>Notre équipe examine votre signalement dans les plus brefs délais</li>
+                                                <li>Nous prenons les mesures appropriées (avertissement, suspension, bannissement)</li>
+                                                <li>Vous recevez une confirmation par email avec un numéro de suivi</li>
+                                                <li>En cas d'urgence grave, nous pouvons contacter les autorités</li>
+                                                <li>Votre identité reste confidentielle durant tout le processus</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Boutons d'action -->
+                                <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                                    <button type="submit" class="flex-1 bg-red-500 hover:bg-red-600 text-white py-4 px-6 rounded-lg font-semibold text-lg transition duration-300">
+                                        <i class="fas fa-flag mr-2"></i>Envoyer le signalement
+                                    </button>
+                                    <button type="button" onclick="resetForm()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-4 px-6 rounded-lg font-semibold text-lg transition duration-300">
+                                        <i class="fas fa-redo mr-2"></i>Recommencer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Sidebar d'information -->
+                    <div class="space-y-6">
+                        <!-- Contacts d'urgence -->
+                        <div class="report-card rounded-2xl p-6 scroll-animate stagger-2">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-4 flex items-center">
+                                <i class="fas fa-phone text-red-500 mr-2 urgency-indicator"></i>
+                                Urgence ?
+                            </h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                En cas de danger immédiat ou de menaces graves, contactez-nous directement :
+                            </p>
+                            <div class="space-y-3">
+                                <a href="tel:+225XXXXXXXX" class="flex items-center p-3 bg-red-50 rounded-lg hover:bg-red-100 transition">
+                                    <i class="fas fa-phone text-red-500 mr-3"></i>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Ligne d'urgence</p>
+                                        <p class="text-sm text-gray-600">+225 07 xx xx xx xx</p>
+                                    </div>
+                                </a>
+                                <a href="https://wa.me/225XXXXXXXX" class="flex items-center p-3 bg-green-50 rounded-lg hover:bg-green-100 transition">
+                                    <i class="fab fa-whatsapp text-green-500 mr-3"></i>
+                                    <div>
+                                        <p class="font-medium text-gray-800">WhatsApp 24/7</p>
+                                        <p class="text-sm text-gray-600">Réponse immédiate</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Conseils de sécurité -->
+                        <div class="report-card rounded-2xl p-6 scroll-animate stagger-3">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-4 flex items-center">
+                                <i class="fas fa-shield-alt text-primary mr-2"></i>
+                                Conseils de sécurité
+                            </h3>
+                            <ul class="space-y-3 text-sm text-gray-600">
+                                <li class="flex items-center">
+                            <i class="fab fa-whatsapp text-green-400 mr-2"></i>
+                            <a href="https://wa.me/225XXXXXXXX" class="text-gray-400 hover:text-white transition duration-300 text-sm">WhatsApp 24/7</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-red-400 mr-2"></i>
+                            <a href="mailto:urgence@ubr-rencontres.com" class="text-gray-400 hover:text-white transition duration-300 text-sm">urgence@ubr-rencontres.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-shield-alt text-yellow-400 mr-2"></i>
+                            <span class="text-gray-400 text-sm">Modération 24/7</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <script>
+        // Pré-sélection du type de signalement
+        function preSelectReport(type) {
+            const reportTypeSelect = document.querySelector('select[name="reportType"]');
+            reportTypeSelect.value = type;
+            
+            // Scroll vers le formulaire
+            document.getElementById('reportForm').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Mettre en évidence le champ sélectionné
+            reportTypeSelect.classList.add('ring-2', 'ring-red-500');
+            setTimeout(() => {
+                reportTypeSelect.classList.remove('ring-2', 'ring-red-500');
+            }, 2000);
+        }
+
+        // Gestion du formulaire de signalement
+        document.getElementById('reportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            const urgency = this.querySelector('select[name="urgency"]').value;
+            
+            // Animation de soumission
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Envoi en cours...';
+            submitBtn.disabled = true;
+            
+            // Simulation d'envoi avec délai variable selon l'urgence
+            const delay = urgency === 'high' ? 1000 : urgency === 'medium' ? 1500 : 2000;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Signalement envoyé !';
+                submitBtn.classList.remove('bg-red-500', 'hover:bg-red-600');
+                submitBtn.classList.add('bg-green-500');
+                
+                // Message personnalisé selon l'urgence
+                let message = 'Signalement reçu !';
+                let trackingNumber = 'UBR-' + Date.now().toString().slice(-6);
+                
+                if (urgency === 'high') {
+                    message = `🚨 Signalement urgent reçu ! Notre équipe va traiter cela immédiatement. Numéro de suivi : ${trackingNumber}`;
+                } else if (urgency === 'medium') {
+                    message = `⚠️ Signalement reçu ! Nous le traiterons sous 24h. Numéro de suivi : ${trackingNumber}`;
+                } else {
+                    message = `✅ Signalement reçu ! Nous le traiterons sous 72h. Numéro de suivi : ${trackingNumber}`;
+                }
+                
+                showToast(message, 'success', 8000); // Toast plus long pour le numéro de suivi
+                
+                // Reset après 3 secondes
+                setTimeout(() => {
+                    this.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('bg-green-500');
+                    submitBtn.classList.add('bg-red-500', 'hover:bg-red-600');
+                    
+                    // Reset des compteurs de caractères
+                    resetCharCounters();
+                }, 3000);
+            }, delay);
+        });
+
+        // Fonction pour réinitialiser le formulaire
+        function resetForm() {
+            document.getElementById('reportForm').reset();
+            resetCharCounters();
+            showToast('Formulaire réinitialisé', 'info');
+        }
+
+        // Reset des compteurs de caractères
+        function resetCharCounters() {
+            const counters = document.querySelectorAll('.text-right');
+            counters.forEach(counter => {
+                if (counter.textContent.includes('/')) {
+                    const maxLength = counter.textContent.split('/')[1];
+                    counter.textContent = `0/${maxLength}`;
+                    counter.classList.remove('text-red-500');
+                    counter.classList.add('text-gray-500');
+                }
+            });
+        }
+
+        // Fonction pour afficher les toasts
+        function showToast(message, type = 'info', duration = 5000) {
+            const toast = document.createElement('div');
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500',
+                warning: 'bg-yellow-500'
+            };
+            
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-times-circle',
+                info: 'fa-info-circle',
+                warning: 'fa-exclamation-triangle'
+            };
+            
+            toast.className = `toast ${colors[type]} text-white p-4 rounded-lg shadow-lg max-w-md`;
+            toast.innerHTML = `
+                <div class="flex items-start">
+                    <i class="fas ${icons[type]} mr-3 mt-1"></i>
+                    <div class="flex-1">
+                        <span class="text-sm">${message}</span>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4 hover:bg-white/20 rounded p-1 flex-shrink-0">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Suppression automatique
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, duration);
+        }
+
+        // Compteurs de caractères pour les textareas
+        function initCharCounters() {
+            const textareas = document.querySelectorAll('textarea[maxlength]');
+            
+            textareas.forEach(textarea => {
+                const maxLength = textarea.getAttribute('maxlength');
+                const counter = textarea.parentNode.querySelector('.text-right');
+                
+                textarea.addEventListener('input', function() {
+                    const count = this.value.length;
+                    counter.textContent = `${count}/${maxLength}`;
+                    
+                    if (count > maxLength * 0.9) {
+                        counter.classList.add('text-red-500');
+                        counter.classList.remove('text-gray-500');
+                    } else {
+                        counter.classList.remove('text-red-500');
+                        counter.classList.add('text-gray-500');
+                    }
+                });
+            });
+        }
+
+        // Validation en temps réel du formulaire
+        function validateForm() {
+            const form = document.getElementById('reportForm');
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (!this.value.trim()) {
+                        this.classList.add('border-red-500');
+                        this.classList.remove('border-gray-300');
+                    } else {
+                        this.classList.remove('border-red-500');
+                        this.classList.add('border-gray-300');
+                    }
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.value.trim()) {
+                        this.classList.remove('border-red-500');
+                        this.classList.add('border-gray-300');
+                    }
+                });
+            });
+        }
+
+        // Validation d'email en temps réel
+        function setupEmailValidation() {
+            const emailInput = document.querySelector('input[name="reporterEmail"]');
+            emailInput.addEventListener('input', function() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (this.value && !emailRegex.test(this.value)) {
+                    this.classList.add('border-yellow-500');
+                    this.classList.remove('border-gray-300', 'border-red-500');
+                } else if (this.value) {
+                    this.classList.remove('border-yellow-500', 'border-red-500');
+                    this.classList.add('border-green-500');
+                }
+            });
+        }
+
+        // Auto-suggestion basée sur le type de problème
+        function setupAutoSuggestions() {
+            const typeSelect = document.querySelector('select[name="reportType"]');
+            const descriptionTextarea = document.querySelector('textarea[name="reportDescription"]');
+            
+            const suggestions = {
+                'harassment': 'Messages répétés non désirés, insistance après refus, langage inapproprié...',
+                'fake_profile': 'Photos qui semblent fausses, informations incohérentes, profil suspect...',
+                'scam': 'Demande d\'argent, histoire suspecte, chantage...',
+                'inappropriate_content': 'Photos non conformes, messages à caractère sexuel...',
+                'spam': 'Messages automatiques, liens suspects, publicité...',
+                'violence': 'Menaces, langage violent, intimidation...',
+                'technical': 'Bug, problème de fonctionnalité, erreur système...'
+            };
+            
+            typeSelect.addEventListener('change', function() {
+                const suggestion = suggestions[this.value];
+                if (suggestion && !descriptionTextarea.value.trim()) {
+                    descriptionTextarea.placeholder = `Exemple : ${suggestion}`;
+                }
+            });
+        }
+
+        // Animations au scroll
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Détection de l'urgence basée sur les mots-clés
+        function setupUrgencyDetection() {
+            const descriptionTextarea = document.querySelector('textarea[name="reportDescription"]');
+            const urgencySelect = document.querySelector('select[name="urgency"]');
+            
+            const urgentKeywords = ['menace', 'danger', 'violence', 'urgence', 'aide', 'peur', 'chantage'];
+            const mediumKeywords = ['harcèlement', 'insiste', 'dérangé', 'inapproprié'];
+            
+            descriptionTextarea.addEventListener('input', function() {
+                const text = this.value.toLowerCase();
+                
+                if (urgentKeywords.some(keyword => text.includes(keyword))) {
+                    urgencySelect.value = 'high';
+                    urgencySelect.classList.add('ring-2', 'ring-red-500');
+                    setTimeout(() => urgencySelect.classList.remove('ring-2', 'ring-red-500'), 2000);
+                } else if (mediumKeywords.some(keyword => text.includes(keyword))) {
+                    if (urgencySelect.value === 'low') {
+                        urgencySelect.value = 'medium';
+                    }
+                }
+            });
+        }
+
+        // Sauvegarde automatique du brouillon
+        function setupAutoSave() {
+            const form = document.getElementById('reportForm');
+            const inputs = form.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    try {
+                        const formData = new FormData(form);
+                        const draft = {};
+                        for (let [key, value] of formData.entries()) {
+                            draft[key] = value;
+                        }
+                        localStorage.setItem('ubr_report_draft', JSON.stringify(draft));
+                    } catch (e) {
+                        // Ignore si localStorage non disponible
+                    }
+                });
+            });
+        }
+
+        // Restaurer le brouillon
+        function restoreDraft() {
+            try {
+                const draft = localStorage.getItem('ubr_report_draft');
+                if (draft) {
+                    const draftData = JSON.parse(draft);
+                    const form = document.getElementById('reportForm');
+                    
+                    Object.keys(draftData).forEach(key => {
+                        const input = form.querySelector(`[name="${key}"]`);
+                        if (input && draftData[key]) {
+                            input.value = draftData[key];
+                            
+                            // Déclencher l'événement input pour les compteurs
+                            if (input.tagName === 'TEXTAREA') {
+                                input.dispatchEvent(new Event('input'));
+                            }
+                        }
+                    });
+                    
+                    showToast('Brouillon restauré automatiquement', 'info');
+                }
+            } catch (e) {
+                // Erreur lors de la restauration, ignorer
+            }
+        }
+
+        // Supprimer le brouillon après envoi réussi
+        function clearDraft() {
+            try {
+                localStorage.removeItem('ubr_report_draft');
+            } catch (e) {
+                // Ignore
+            }
+        }
+
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollAnimations();
+            initCharCounters();
+            validateForm();
+            setupEmailValidation();
+            setupAutoSuggestions();
+            setupUrgencyDetection();
+            setupAutoSave();
+            restoreDraft();
+            
+            // Modifier l'événement submit pour supprimer le brouillon
+            const originalSubmitHandler = document.getElementById('reportForm').onsubmit;
+            document.getElementById('reportForm').addEventListener('submit', function(e) {
+                // Après un envoi réussi, supprimer le brouillon
+                setTimeout(() => {
+                    clearDraft();
+                }, 3000);
+            });
+        });
+
+        // Confirmation avant fermeture si formulaire rempli
+        window.addEventListener('beforeunload', function(e) {
+            const form = document.getElementById('reportForm');
+            const formData = new FormData(form);
+            let hasData = false;
+            
+            for (let [key, value] of formData.entries()) {
+                if (value.trim()) {
+                    hasData = true;
+                    break;
+                }
+            }
+            
+            if (hasData) {
+                e.preventDefault();
+                e.returnValue = 'Vous avez des données non sauvegardées. Êtes-vous sûr de vouloir quitter ?';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nous Contacter - UBR | Union Bénie et Réelle</title>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+    .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .contact-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1100;
+        animation: slideInRight 0.3s ease-out;
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .stagger-5 { transition-delay: 0.5s; }
+    .stagger-6 { transition-delay: 0.6s; }
+
+    .floating-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+        animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-10px);
+        }
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+</style>
+
+</head>
+<body class="font-inter bg-gray-50">
+
+
+    <!-- Hero Section -->
+    <section class="gradient-bg py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="font-poppins text-5xl font-bold text-white mb-6 scroll-animate">
+                    <i class="fas fa-envelope text-accent mr-4"></i>
+                    Nous contacter
+                </h1>
+                <p class="text-xl text-blue-100 mb-8 scroll-animate stagger-1">
+                    Notre équipe est là pour vous accompagner dans votre recherche de l'âme sœur. N'hésitez pas à nous faire part de vos questions ou suggestions !
+                </p>
+                <div class="grid md:grid-cols-3 gap-4 mt-12 scroll-animate stagger-2">
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4">
+                        <i class="fas fa-clock text-accent text-2xl mb-2"></i>
+                        <p class="text-blue-100">Réponse sous 24h</p>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4">
+                        <i class="fas fa-shield-alt text-accent text-2xl mb-2"></i>
+                        <p class="text-blue-100">100% Confidentiel</p>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4">
+                        <i class="fas fa-users text-accent text-2xl mb-2"></i>
+                        <p class="text-blue-100">Équipe dédiée</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Contact Methods Section -->
+    <section class="bg-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 scroll-animate">
+                <h2 class="font-poppins text-4xl font-bold text-gray-800 mb-4">
+                    Plusieurs moyens de nous joindre
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Choisissez le canal qui vous convient le mieux
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Email -->
+                <div class="contact-card rounded-2xl p-8 text-center scroll-animate stagger-1">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-envelope text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="font-poppins font-semibold text-xl mb-4">Email</h3>
+                    <p class="text-gray-600 mb-4">Pour toutes vos questions</p>
+                    <a href="mailto:support@ubr-rencontres.com" class="text-primary hover:underline font-medium">
+                        support@ubr-rencontres.com
+                    </a>
+                    <div class="mt-4 text-sm text-gray-500">
+                        <i class="fas fa-clock mr-1"></i>Réponse sous 24h
+                    </div>
+                </div>
+
+                <!-- Téléphone -->
+                <div class="contact-card rounded-2xl p-8 text-center scroll-animate stagger-2">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-phone text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="font-poppins font-semibold text-xl mb-4">Téléphone</h3>
+                    <p class="text-gray-600 mb-4">Support urgent</p>
+                    <a href="tel:+225XXXXXXXX" class="text-secondary hover:underline font-medium">
+                        +225 07 xx xx xx xx
+                    </a>
+                    <div class="mt-4 text-sm text-gray-500">
+                        <i class="fas fa-clock mr-1"></i>Lun-Ven 8h-18h
+                    </div>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="contact-card rounded-2xl p-8 text-center scroll-animate stagger-3">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fab fa-whatsapp text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="font-poppins font-semibold text-xl mb-4">WhatsApp</h3>
+                    <p class="text-gray-600 mb-4">Chat en temps réel</p>
+                    <a href="https://wa.me/225XXXXXXXX" class="text-accent hover:underline font-medium">
+                        +225 07 xx xx xx xx
+                    </a>
+                    <div class="mt-4 text-sm text-gray-500">
+                        <i class="fas fa-clock mr-1"></i>7j/7 9h-21h
+                    </div>
+                </div>
+
+                <!-- Bureau -->
+                <div class="contact-card rounded-2xl p-8 text-center scroll-animate stagger-4">
+                    <div class="w-16 h-16 bg-divine/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-map-marker-alt text-divine text-2xl"></i>
+                    </div>
+                    <h3 class="font-poppins font-semibold text-xl mb-4">Bureau</h3>
+                    <p class="text-gray-600 mb-4">Rendez-vous sur place</p>
+                    <p class="text-divine font-medium">
+                        Bouaké, Côte d'Ivoire
+                    </p>
+                    <div class="mt-4 text-sm text-gray-500">
+                        <i class="fas fa-clock mr-1"></i>Sur rendez-vous
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 1 : Formulaire de contact -->
+<!-- SECTION 1 : Formulaire de contact élargi -->
+<section class="bg-gray-50 py-20">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12 scroll-animate">
+        <h2 class="font-poppins text-4xl font-bold text-gray-800 mb-4">
+          Envoyez-nous un message
+        </h2>
+        <p class="text-xl text-gray-600">
+          Remplissez le formulaire ci-dessous et nous vous répondrons rapidement
+        </p>
+      </div>
+
+      <!-- Formulaire centré et élargi -->
+      <div class="flex justify-center">
+        <div class="contact-card rounded-2xl p-8 bg-white shadow-lg w-full max-w-xl">
+          <form id="contactForm" class="space-y-6" method="POST" action="#">
+            <div class="bg-blue-50 p-4 rounded-lg">
+              <div class="flex items-start">
+                <i class="fas fa-info-circle text-primary mt-1 mr-2"></i>
+                <div class="text-sm text-gray-700">
+                  <p class="font-medium mb-1">Information importante :</p>
+                  <p>Nous nous engageons à vous répondre sous 24h ouvrées. Pour les urgences techniques, appelez-nous directement.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nom -->
+            <div>
+              <label for="name" class="block text-gray-700 font-medium mb-2">Nom complet</label>
+              <input type="text" id="name" name="name" required placeholder="Votre nom complet"
+                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+              <input type="email" id="email" name="email" required placeholder="votre.email@example.com"
+                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+
+            <!-- Message -->
+            <div>
+              <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+              <textarea id="message" name="message" required rows="5" placeholder="Votre message ici..."
+                class="w-full border border-gray-300 rounded-lg px-4 py-3 resize-y focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+            </div>
+
+            <button type="submit"
+              class="w-full bg-primary hover:bg-blue-700 text-white py-4 px-6 rounded-lg font-semibold text-lg transition duration-300">
+              <i class="fas fa-paper-plane mr-2"></i>Envoyer le message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 2 : Informations supplémentaires -->
+<section class="bg-white py-20">
+  <div class="container mx-auto px-4">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-3 gap-12">
+      <!-- FAQ -->
+      <div class="contact-card rounded-2xl p-8 shadow-lg">
+        <h3 class="font-poppins font-semibold text-xl mb-6 flex items-center">
+          <i class="fas fa-question-circle text-accent mr-2"></i>
+          Questions fréquentes
+        </h3>
+        <div class="space-y-4">
+          <div class="border-l-4 border-primary pl-4">
+            <h4 class="font-medium text-gray-800">Comment modifier mon profil ?</h4>
+            <p class="text-sm text-gray-600 mt-1">Connectez-vous et accédez à "Mon Profil" depuis votre tableau de bord.</p>
+          </div>
+          <div class="border-l-4 border-secondary pl-4">
+            <h4 class="font-medium text-gray-800">Puis-je suspendre mon abonnement ?</h4>
+            <p class="text-sm text-gray-600 mt-1">Oui, contactez-nous pour mettre en pause votre compte temporairement.</p>
+          </div>
+          <div class="border-l-4 border-accent pl-4">
+            <h4 class="font-medium text-gray-800">Comment signaler un profil suspect ?</h4>
+            <p class="text-sm text-gray-600 mt-1">Utilisez notre <a href="signaler.html" class="text-accent hover:underline">formulaire de signalement</a> dédié.</p>
+          </div>
+        </div>
+        <div class="mt-6 pt-6 border-t">
+          <a href="FAQ.html" class="text-primary hover:underline font-medium">
+            <i class="fas fa-arrow-right mr-1"></i>Voir toutes les FAQ
+          </a>
+        </div>
+      </div>
+
+      <!-- Horaires -->
+      <div class="contact-card rounded-2xl p-8 shadow-lg">
+        <h3 class="font-poppins font-semibold text-xl mb-6 flex items-center">
+          <i class="fas fa-clock text-secondary mr-2"></i>
+          Nos horaires
+        </h3>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Lundi - Vendredi</span>
+            <span class="font-medium text-gray-800">8h00 - 18h00</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Samedi</span>
+            <span class="font-medium text-gray-800">9h00 - 16h00</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Dimanche</span>
+            <span class="font-medium text-red-500">Fermé</span>
+          </div>
+          <div class="flex justify-between items-center pt-3 border-t">
+            <span class="text-gray-700">WhatsApp</span>
+            <span class="font-medium text-accent">7j/7 - 9h00 - 21h00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Équipe -->
+      <div class="contact-card rounded-2xl p-8 shadow-lg">
+        <h3 class="font-poppins font-semibold text-xl mb-6 flex items-center">
+          <i class="fas fa-users text-divine mr-2"></i>
+          Notre équipe
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+              ST
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-800">Support Technique</h4>
+              <p class="text-sm text-gray-600">Problèmes de connexion, bugs</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-white font-bold">
+              CR
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-800">Conseils Relationnels</h4>
+              <p class="text-sm text-gray-600">Accompagnement personnalisé</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold">
+              CS
+            </div>
+            <div>
+              <h4 class="font-medium text-gray-800">Service Client</h4>
+              <p class="text-sm text-gray-600">Questions générales, abonnements</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- Testimonials Section -->
+    <section class="bg-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 scroll-animate">
+                <h2 class="font-poppins text-4xl font-bold text-gray-800 mb-4">
+                    Ils nous font confiance
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Découvrez les retours de nos membres sur notre service client
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="contact-card rounded-2xl p-6 scroll-animate stagger-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-3">
+                            M
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Marie K.</h4>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic text-sm">
+                        "L'équipe UBR est très réactive ! Ils ont résolu mon problème de connexion en moins d'une heure. Service client exceptionnel !"
+                    </p>
+                </div>
+                
+                <div class="contact-card rounded-2xl p-6 scroll-animate stagger-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white font-bold mr-3">
+                            J
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Joseph M.</h4>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic text-sm">
+                        "Les conseils relationnels sont précieux. L'équipe comprend vraiment les valeurs chrétiennes et accompagne avec bienveillance."
+                    </p>
+                </div>
+                
+                <div class="contact-card rounded-2xl p-6 scroll-animate stagger-3">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-divine rounded-full flex items-center justify-center text-white font-bold mr-3">
+                            A
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Anne S.</h4>
+                            <div class="flex text-accent">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic text-sm">
+                        "Communication claire et professionnelle. Ils prennent le temps d'écouter et de bien comprendre nos besoins. Bravo !"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Contact Section -->
+    <section class="bg-red-50 py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center scroll-animate">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-exclamation-triangle text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <h2 class="font-poppins text-3xl font-bold text-gray-800 mb-4">
+                        Urgence ou problème grave ?
+                    </h2>
+                    <p class="text-gray-600 mb-6">
+                        Pour les situations urgentes (harcèlement, menaces, problèmes de sécurité), contactez-nous immédiatement ou utilisez notre formulaire de signalement.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="tel:+225XXXXXXXX" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            <i class="fas fa-phone mr-2"></i>Appeler maintenant
+                        </a>
+                        <a href="signaler.html" class="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            <i class="fas fa-flag mr-2"></i>Signaler un problème
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bouton flottant d'aide -->
+    <div class="floating-btn">
+        <button onclick="showQuickHelp()" class="bg-primary hover:bg-blue-700 text-white w-16 h-16 rounded-full shadow-lg transition duration-300">
+            <i class="fas fa-question text-xl"></i>
+        </button>
+    </div>
+
+    <script>
+        // Gestion du formulaire de contact
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Animation de soumission
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Envoi en cours...';
+            submitBtn.disabled = true;
+            
+            // Simulation d'envoi
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Message envoyé !';
+                submitBtn.classList.remove('bg-primary', 'hover:bg-blue-700');
+                submitBtn.classList.add('bg-green-500');
+                
+                // Afficher le toast de succès
+                showToast('Message envoyé avec succès ! Nous vous répondrons sous 24h.', 'success');
+                
+                // Reset après 3 secondes
+                setTimeout(() => {
+                    this.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('bg-green-500');
+                    submitBtn.classList.add('bg-primary', 'hover:bg-blue-700');
+                    
+                    // Reset du compteur de caractères
+                    const charCount = document.querySelector('textarea[name="message"]').parentNode.querySelector('.text-sm');
+                    if (charCount) charCount.textContent = '0/1000';
+                }, 3000);
+            }, 2000);
+        });
+
+        // Fonction pour afficher les toasts
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500',
+                warning: 'bg-yellow-500'
+            };
+            
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-times-circle',
+                info: 'fa-info-circle',
+                warning: 'fa-exclamation-triangle'
+            };
+            
+            toast.className = `toast ${colors[type]} text-white p-4 rounded-lg shadow-lg max-w-md`;
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${icons[type]} mr-3"></i>
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4 hover:bg-white/20 rounded p-1">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Suppression automatique après 5 secondes
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, 5000);
+        }
+
+        // Fonction d'aide rapide
+        function showQuickHelp() {
+            const helpMessages = [
+                "📧 Pour les questions générales, utilisez le formulaire de contact",
+                "📞 Pour les urgences, appelez-nous au +225 07 xx xx xx xx",
+                "💬 WhatsApp disponible 7j/7 de 9h à 21h",
+                "⏰ Réponse garantie sous 24h ouvrées",
+                "🔒 Toutes vos données sont protégées et confidentielles"
+            ];
+            
+            const randomMessage = helpMessages[Math.floor(Math.random() * helpMessages.length)];
+            showToast(randomMessage, 'info');
+        }
+
+        // Compteur de caractères pour le textarea
+        const textarea = document.querySelector('textarea[name="message"]');
+        const charCountDisplay = textarea.parentNode.querySelector('.text-sm');
+
+        textarea.addEventListener('input', function() {
+            const count = this.value.length;
+            const maxLength = this.getAttribute('maxlength') || 1000;
+            charCountDisplay.textContent = `${count}/${maxLength}`;
+            
+            if (count > maxLength * 0.9) {
+                charCountDisplay.classList.add('text-red-500');
+                charCountDisplay.classList.remove('text-gray-500');
+            } else {
+                charCountDisplay.classList.remove('text-red-500');
+                charCountDisplay.classList.add('text-gray-500');
+            }
+        });
+
+        // Animations au scroll
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Validation en temps réel du formulaire
+        function validateForm() {
+            const form = document.getElementById('contactForm');
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (!this.value.trim()) {
+                        this.classList.add('border-red-500');
+                        this.classList.remove('border-gray-300');
+                    } else {
+                        this.classList.remove('border-red-500');
+                        this.classList.add('border-gray-300');
+                    }
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.value.trim()) {
+                        this.classList.remove('border-red-500');
+                        this.classList.add('border-gray-300');
+                    }
+                });
+            });
+        }
+
+        // Validation d'email en temps réel
+        const emailInput = document.querySelector('input[name="email"]');
+        emailInput.addEventListener('input', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (this.value && !emailRegex.test(this.value)) {
+                this.classList.add('border-yellow-500');
+                this.classList.remove('border-gray-300', 'border-red-500');
+            } else if (this.value) {
+                this.classList.remove('border-yellow-500', 'border-red-500');
+                this.classList.add('border-green-500');
+            }
+        });
+
+        // Validation de téléphone
+        const phoneInput = document.querySelector('input[name="phone"]');
+        phoneInput.addEventListener('input', function() {
+            // Formater automatiquement le numéro
+            let value = this.value.replace(/\D/g, '');
+            if (value.startsWith('225')) {
+                // Format ivoirien
+                value = value.replace(/(\d{3})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '+$1 $2 $3 $4 $5 $6');
+            }
+            this.value = value;
+        });
+
+        // Auto-complétion du sujet selon les mots clés du message
+        const messageTextarea = document.querySelector('textarea[name="message"]');
+        const subjectSelect = document.querySelector('select[name="subject"]');
+
+        messageTextarea.addEventListener('input', function() {
+            if (subjectSelect.value === '') {
+                const message = this.value.toLowerCase();
+                if (message.includes('bug') || message.includes('problème') || message.includes('erreur')) {
+                    subjectSelect.value = 'support';
+                } else if (message.includes('abonnement') || message.includes('paiement') || message.includes('facture')) {
+                    subjectSelect.value = 'billing';
+                } else if (message.includes('compte') || message.includes('profil') || message.includes('connexion')) {
+                    subjectSelect.value = 'account';
+                } else if (message.includes('conseil') || message.includes('relation') || message.includes('rencontre')) {
+                    subjectSelect.value = 'advice';
+                }
+            }
+        });
+
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollAnimations();
+            validateForm();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemple d'intégration des modules JavaScript - UBR</title>
+
+  <!-- Tailwind CSS compilé -->
+  <link rel="stylesheet" href="./assets/css/output.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-[Poppins] bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8">Exemple d'intégration des modules JavaScript</h1>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Comment intégrer les modules JavaScript</h2>
+            
+            <p class="mb-4">Pour intégrer les modules JavaScript extraits dans vos pages HTML existantes, suivez ces étapes :</p>
+            
+            <ol class="list-decimal pl-6 mb-6 space-y-2">
+                <li>Ajoutez d'abord le module <code class="bg-gray-100 px-2 py-1 rounded">utils.js</code> qui contient les fonctions utilitaires communes.</li>
+                <li>Ajoutez ensuite les modules spécifiques dont vous avez besoin (forms.js, user-management.js, testimonials.js, reports.js).</li>
+                <li>Enfin, ajoutez le fichier <code class="bg-gray-100 px-2 py-1 rounded">app.js</code> qui initialise les fonctionnalités en fonction de la page.</li>
+            </ol>
+            
+            <div class="bg-gray-100 p-4 rounded-lg mb-6">
+                <h3 class="text-lg font-semibold mb-2">Exemple de code à ajouter avant la fermeture de la balise body</h3>
+                <pre class="bg-gray-800 text-white p-4 rounded overflow-x-auto">
+&lt;!-- Modules JavaScript --&gt;
+&lt;script src="assets/js/modules/utils.js"&gt;&lt;/script&gt;
+
+&lt;!-- Modules spécifiques (ajoutez uniquement ceux dont vous avez besoin) --&gt;
+&lt;script src="assets/js/modules/forms.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/modules/user-management.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/modules/testimonials.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/modules/reports.js"&gt;&lt;/script&gt;
+
+&lt;!-- Initialisation de l'application --&gt;
+&lt;script src="assets/js/app.js"&gt;&lt;/script&gt;
+
+&lt;!-- Script principal existant (conservez-le si nécessaire) --&gt;
+&lt;script src="assets/js/main.js"&gt;&lt;/script&gt;</pre>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Modules disponibles et leurs fonctionnalités</h2>
+            
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-primary">utils.js</h3>
+                    <p class="text-gray-600 mb-2">Fonctions utilitaires communes à toutes les pages</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Affichage de notifications toast</li>
+                        <li>Compteurs de caractères pour les zones de texte</li>
+                        <li>Animations au défilement</li>
+                        <li>Validation de formulaires</li>
+                        <li>Validation d'email</li>
+                        <li>Formatage de numéros de téléphone</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-primary">forms.js</h3>
+                    <p class="text-gray-600 mb-2">Gestion des formulaires</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Soumission de formulaire avec animation</li>
+                        <li>Réinitialisation de formulaire</li>
+                        <li>Auto-suggestion basée sur le type de sélection</li>
+                        <li>Auto-complétion du sujet basée sur les mots-clés</li>
+                        <li>Détection d'urgence basée sur les mots-clés</li>
+                        <li>Sauvegarde automatique des brouillons</li>
+                        <li>Confirmation avant fermeture de page</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-primary">user-management.js</h3>
+                    <p class="text-gray-600 mb-2">Gestion des utilisateurs</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Gestion des utilisateurs bloqués</li>
+                        <li>Filtrage et recherche d'utilisateurs</li>
+                        <li>Exportation de la liste des utilisateurs bloqués</li>
+                        <li>Gestion des photos de profil</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-primary">testimonials.js</h3>
+                    <p class="text-gray-600 mb-2">Gestion des témoignages</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Système de notation par étoiles</li>
+                        <li>Modal de témoignage</li>
+                        <li>Formulaire de témoignage</li>
+                        <li>Filtrage des témoignages</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold text-primary">reports.js</h3>
+                    <p class="text-gray-600 mb-2">Gestion des signalements</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Système de signalement</li>
+                        <li>Pré-sélection du type de rapport</li>
+                        <li>Suggestions automatiques</li>
+                        <li>Soumission de signalement avec délai variable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4">Exemple de démonstration</h2>
+            
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2">Notification Toast</h3>
+                <button id="show-notification" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition">Afficher une notification</button>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-2">Compteur de caractères</h3>
+                <div class="relative">
+                    <textarea id="demo-textarea" class="w-full p-3 border border-gray-300 rounded resize-none" rows="4" maxlength="200" data-counter="textarea-counter" placeholder="Écrivez quelque chose ici..."></textarea>
+                    <div id="textarea-counter" class="text-sm text-gray-500 text-right mt-1">0 / 200 caractères</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modules JavaScript -->
+    <script src="assets/js/modules/utils.js"></script>
+    <script src="assets/js/modules/forms.js"></script>
+    
+    <!-- Script de démonstration -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialiser les compteurs de caractères
+            if (window.UBRUtils && typeof window.UBRUtils.initCharCounters === 'function') {
+                window.UBRUtils.initCharCounters();
+            }
+            
+            // Bouton de démonstration pour les notifications
+            const notificationBtn = document.getElementById('show-notification');
+            if (notificationBtn && window.UBRUtils && typeof window.UBRUtils.showNotification === 'function') {
+                notificationBtn.addEventListener('click', function() {
+                    window.UBRUtils.showNotification('Ceci est un exemple de notification toast !', 'success');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

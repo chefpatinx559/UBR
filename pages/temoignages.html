@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Témoignages - UBR | Union Bénie et Réelle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#10b981',
+                        accent: '#f59e0b',
+                        divine: '#7c3aed'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .star-rating {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .star-rating input {
+            display: none;
+        }
+        
+        .star-rating label {
+            font-size: 2rem;
+            color: #d1d5db;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: #f59e0b;
+            transform: scale(1.1);
+        }
+        
+        .modal-overlay {
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .modal-content {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .animate-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+
+    <!-- Hero Section -->
+    <section class="gradient-bg py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="font-poppins text-5xl font-bold text-white mb-6 scroll-animate">
+                    <i class="fas fa-star text-accent mr-4"></i>
+                    Témoignages de nos couples
+                </h1>
+                <p class="text-xl text-blue-100 mb-8 scroll-animate stagger-1">
+                    Découvrez les belles histoires d'amour nées grâce à UBR et partagez la vôtre !
+                </p>
+                <button onclick="openTestimonialModal()" class="bg-accent hover:bg-yellow-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition duration-300 scroll-animate stagger-2">
+                    <i class="fas fa-heart mr-2"></i>Partager mon témoignage
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center scroll-animate stagger-1">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-heart text-primary text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-bold text-primary mb-2">2,847</div>
+                    <p class="text-gray-600">Membres actifs</p>
+                </div>
+                <div class="text-center scroll-animate stagger-2">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-rings-wedding text-secondary text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-bold text-secondary mb-2">156</div>
+                    <p class="text-gray-600">Mariages bénis</p>
+                </div>
+                <div class="text-center scroll-animate stagger-3">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-accent text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-bold text-accent mb-2">4.9/5</div>
+                    <p class="text-gray-600">Note moyenne</p>
+                </div>
+                <div class="text-center scroll-animate stagger-4">
+                    <div class="w-16 h-16 bg-divine/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-comments text-divine text-2xl"></i>
+                    </div>
+                    <div class="text-4xl font-bold text-divine mb-2">89</div>
+                    <p class="text-gray-600">Témoignages</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Grid -->
+    <section class="bg-gray-50 py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 scroll-animate">
+                <h2 class="font-poppins text-4xl font-bold text-gray-800 mb-4">
+                    Histoires d'amour inspirantes
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Découvrez comment l'amour a transformé leur vie
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Témoignage 1 -->
+                <div class="testimonial-card rounded-2xl p-8 scroll-animate stagger-1">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                            S&D
+                        </div>
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg">Sarah & David</h4>
+                            <p class="text-sm text-gray-600">Mariés en juin 2024</p>
+                            <div class="flex text-accent mt-1">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed mb-4">
+                        "Grâce à UBR, nous avons trouvé bien plus qu'un partenaire, nous avons trouvé notre complément selon le plan de Dieu. Les valeurs partagées ont été la base solide de notre relation. Aujourd'hui mariés, nous recommandons UBR à tous nos amis célibataires !"
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-map-marker-alt mr-1"></i>
+                        <span>Abidjan, Côte d'Ivoire</span>
+                    </div>
+                </div>
+
+                <!-- Témoignage 2 -->
+                <div class="testimonial-card rounded-2xl p-8 scroll-animate stagger-2">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                            M&P
+                        </div>
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg">Marie & Paul</h4>
+                            <p class="text-sm text-gray-600">En couple depuis 1 an</p>
+                            <div class="flex text-accent mt-1">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed mb-4">
+                        "L'algorithme de matching est incroyable ! Nous partageons les mêmes valeurs et la même vision du mariage chrétien. UBR nous a permis de nous rencontrer malgré la distance. Notre relation grandit dans la foi et l'amour chaque jour."
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-map-marker-alt mr-1"></i>
+                        <span>Bouaké, Côte d'Ivoire</span>
+                    </div>
+                </div>
+
+                <!-- Témoignage 3 -->
+                <div class="testimonial-card rounded-2xl p-8 scroll-animate stagger-3">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-divine rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                            A&J
+                        </div>
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg">Anne & Joseph</h4>
+                            <p class="text-sm text-gray-600">Fiançailles en cours</p>
+                            <div class="flex text-accent mt-1">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed mb-4">
+                        "Sécurisé, respectueux et efficace. UBR nous a permis de construire notre relation sur de bonnes bases, dans la prière et la patience. Nos familles sont bénies de voir notre amour grandir. Mariage prévu en décembre !"
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-map-marker-alt mr-1"></i>
+                        <span>Yamoussoukro, Côte d'Ivoire</span>
+                    </div>
+                </div>
+
+                <!-- Témoignage 4 -->
+                <div class="testimonial-card rounded-2xl p-8 scroll-animate stagger-4">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                            L&M
+                        </div>
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg">Lucie & Marc</h4>
+                            <p class="text-sm text-gray-600">Mariés en mars 2024</p>
+                            <div class="flex text-accent mt-1">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed mb-4">
+                        "Après des années de célibat, j'avais perdu espoir. UBR m'a redonné confiance ! L'accompagnement personnalisé et les conseils ont été précieux. Marc et moi remercions Dieu pour cette belle rencontre qui a changé nos vies."
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-map-marker-alt mr-1"></i>
+                        <span>San Pedro, Côte d'Ivoire</span>
+                    </div>
+                </div>
+
+                <!-- Témoignage 5 -->
+                <div class="testimonial-card rounded-2xl p-8 scroll-animate stagger-5">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                            E&K
+                        </div>
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg">Esther & Kofi</h4>
+                            <p class="text-sm text-gray-600">En couple depuis 8 mois</p>
+                            <div class="flex text-accent mt-1">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed mb-4">
+                        "Interface intuitive, profils de qualité, service client réactif... UBR surpasse toutes mes attentes ! Kofi et moi préparons déjà notre avenir ensemble. Cette plateforme a vraiment été un canal de bénédiction dans nos vies."
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-map-marker-alt mr-1"></i>
+                        <span>Daloa, Côte d'Ivoire</span>
+                    </div>
+                </div>
+
+                <!-- Témoignage 6 -->
+                <div class="testimonial-card rounded-2xl p-8 scroll-animate stagger-6">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                            R&D
+                        </div>
+                        <div>
+                            <h4 class="font-poppins font-semibold text-lg">Ruth & Daniel</h4>
+                            <p class="text-sm text-gray-600">Mariés en août 2024</p>
+                            <div class="flex text-accent mt-1">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic leading-relaxed mb-4">
+                        "UBR nous a rapprochés malgré nos différences culturelles. La plateforme favorise une communication authentique et respectueuse. Notre mariage traditionnel et religieux a été une célébration de l'amour que Dieu nous a accordé !"
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-map-marker-alt mr-1"></i>
+                        <span>Korhogo, Côte d'Ivoire</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-bg py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="font-poppins text-4xl font-bold text-white mb-6 scroll-animate">
+                Votre histoire d'amour commence aujourd'hui
+            </h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto scroll-animate stagger-1">
+                Rejoignez notre communauté et trouvez l'âme sœur que Dieu a préparée pour vous
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center scroll-animate stagger-2">
+                <a href="register.html" class="bg-accent hover:bg-yellow-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition duration-300">
+                    <i class="fas fa-heart mr-2"></i>Rejoindre UBR
+                </a>
+                <button onclick="openTestimonialModal()" class="bg-white hover:bg-blue-50 text-primary px-8 py-4 rounded-full font-semibold text-lg transition duration-300">
+                    <i class="fas fa-star mr-2"></i>Partager mon témoignage
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal pour ajouter un témoignage -->
+    <div id="testimonialModal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto modal-content">
+                <div class="p-6 border-b">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-2xl font-bold text-gray-800">
+                            <i class="fas fa-star text-accent mr-2"></i>Partagez votre témoignage
+                        </h3>
+                        <button onclick="closeModal('testimonialModal')" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <form id="testimonialForm" class="p-6 space-y-6">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Votre prénom *</label>
+                            <input type="text" name="firstName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Ex: Sarah" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Prénom de votre partenaire *</label>
+                            <input type="text" name="partnerName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Ex: David" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                        <input type="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="votre@email.com" required>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Statut de votre relation *</label>
+                            <select name="relationshipStatus" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                <option value="">Choisissez votre statut</option>
+                                <option value="dating">En couple</option>
+                                <option value="engaged">Fiançés</option>
+                                <option value="married">Mariés</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Ville</label>
+                            <input type="text" name="city" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Ex: Abidjan">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-4">Votre note pour UBR *</label>
+                        <div class="star-rating flex-row-reverse justify-center">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Votre témoignage *</label>
+                        <textarea name="testimonial" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Racontez votre belle histoire avec UBR..." required maxlength="500"></textarea>
+                        <div class="text-sm text-gray-500 mt-1 text-right">0/500</div>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle text-primary mt-1 mr-2"></i>
+                            <div class="text-sm text-gray-700">
+                                <p class="font-medium mb-1">À propos de votre témoignage :</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>Votre témoignage sera modéré avant publication</li>
+                                    <li>Seuls les prénoms seront affichés publiquement</li>
+                                    <li>Vous pouvez demander la suppression à tout moment</li>
+                                    <li>Les témoignages authentiques sont privilégiés</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button type="submit" class="flex-1 bg-primary hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-300">
+                            <i class="fas fa-heart mr-2"></i>Partager mon témoignage
+                        </button>
+                        <button type="button" onclick="closeModal('testimonialModal')" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold transition duration-300">
+                            Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fonctions pour ouvrir/fermer les modales
+        function openTestimonialModal() {
+            document.getElementById('testimonialModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fermer les modales en cliquant sur l'overlay
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                const modalId = e.target.id;
+                closeModal(modalId);
+            }
+        });
+
+        // Fermer les modales avec la touche Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (!document.getElementById('testimonialModal').classList.contains('hidden')) {
+                    closeModal('testimonialModal');
+                }
+            }
+        });
+
+        // Gestion du formulaire de témoignage
+        document.getElementById('testimonialForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            // Animation de soumission
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Envoi en cours...';
+            submitBtn.disabled = true;
+            
+            // Simulation d'envoi
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Témoignage envoyé !';
+                submitBtn.classList.remove('bg-primary', 'hover:bg-blue-700');
+                submitBtn.classList.add('bg-green-500');
+                
+                // Afficher le toast de succès
+                showToast('Merci pour votre témoignage ! Il sera modéré avant publication.', 'success');
+                
+                // Fermer la modale après 2 secondes
+                setTimeout(() => {
+                    closeModal('testimonialModal');
+                    this.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('bg-green-500');
+                    submitBtn.classList.add('bg-primary', 'hover:bg-blue-700');
+                    
+                    // Reset du compteur de caractères
+                    const charCount = document.querySelector('textarea[name="testimonial"]').parentNode.querySelector('.text-sm');
+                    if (charCount) charCount.textContent = '0/500';
+                }, 2000);
+            }, 2000);
+        });
+
+        // Fonction pour afficher les toasts
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500',
+                warning: 'bg-yellow-500'
+            };
+            
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-times-circle',
+                info: 'fa-info-circle',
+                warning: 'fa-exclamation-triangle'
+            };
+            
+            toast.className = `toast ${colors[type]} text-white p-4 rounded-lg shadow-lg max-w-md`;
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas ${icons[type]} mr-3"></i>
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4 hover:bg-white/20 rounded p-1">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Suppression automatique après 5 secondes
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, 5000);
+        }
+
+        // Gestion des étoiles pour la notation
+        const starInputs = document.querySelectorAll('.star-rating input');
+        const starLabels = document.querySelectorAll('.star-rating label');
+
+        starInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const rating = parseInt(this.value);
+                starLabels.forEach((label, index) => {
+                    if (index >= (5 - rating)) {
+                        label.style.color = '#f59e0b';
+                    } else {
+                        label.style.color = '#d1d5db';
+                    }
+                });
+            });
+        });
+
+        // Animation au hover des étoiles
+        starLabels.forEach((label, index) => {
+            label.addEventListener('mouseenter', function() {
+                starLabels.forEach((l, i) => {
+                    if (i >= index) {
+                        l.style.color = '#f59e0b';
+                        l.style.transform = 'scale(1.1)';
+                    } else {
+                        l.style.color = '#d1d5db';
+                        l.style.transform = 'scale(1)';
+                    }
+                });
+            });
+        });
+
+        // Reset des étoiles quand on quitte la zone
+        document.querySelector('.star-rating').addEventListener('mouseleave', function() {
+            const checkedInput = this.querySelector('input:checked');
+            if (checkedInput) {
+                const rating = parseInt(checkedInput.value);
+                starLabels.forEach((label, index) => {
+                    if (index >= (5 - rating)) {
+                        label.style.color = '#f59e0b';
+                    } else {
+                        label.style.color = '#d1d5db';
+                    }
+                    label.style.transform = 'scale(1)';
+                });
+            } else {
+                starLabels.forEach(label => {
+                    label.style.color = '#d1d5db';
+                    label.style.transform = 'scale(1)';
+                });
+            }
+        });
+
+        // Compteur de caractères pour le textarea
+        const textarea = document.querySelector('textarea[name="testimonial"]');
+        const charCountDisplay = textarea.parentNode.querySelector('.text-sm');
+
+        textarea.addEventListener('input', function() {
+            const count = this.value.length;
+            const maxLength = this.getAttribute('maxlength') || 500;
+            charCountDisplay.textContent = `${count}/${maxLength}`;
+            
+            if (count > maxLength * 0.9) {
+                charCountDisplay.classList.add('text-red-500');
+                charCountDisplay.classList.remove('text-gray-500');
+            } else {
+                charCountDisplay.classList.remove('text-red-500');
+                charCountDisplay.classList.add('text-gray-500');
+            }
+        });
+
+        // Animations au scroll
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Validation en temps réel du formulaire
+        function validateForm() {
+            const form = document.getElementById('testimonialForm');
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (!this.value.trim()) {
+                        this.classList.add('border-red-500');
+                        this.classList.remove('border-gray-300');
+                    } else {
+                        this.classList.remove('border-red-500');
+                        this.classList.add('border-gray-300');
+                    }
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.value.trim()) {
+                        this.classList.remove('border-red-500');
+                        this.classList.add('border-gray-300');
+                    }
+                });
+            });
+        }
+
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollAnimations();
+            validateForm();
+        });
+    </script>
+</body>
+</html>

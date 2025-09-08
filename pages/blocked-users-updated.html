@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilisateurs Bloqués - UBR</title>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-3">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary to-divine rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-800">UBR</span>
+                    </a>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="discover.html" class="text-gray-600 hover:text-primary transition">Découvrir</a>
+                    <a href="matches.html" class="text-gray-600 hover:text-primary transition">Matches</a>
+                    <a href="messages.html" class="text-gray-600 hover:text-primary transition">Messages</a>
+                    <a href="profile.html" class="text-gray-600 hover:text-primary transition">Profil</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="settings.html" class="text-gray-600 hover:text-primary transition">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                    <a href="notifications.html" class="text-gray-600 hover:text-primary transition">
+                        <i class="fas fa-bell"></i>
+                    </a>
+                    <a href="profile.html" class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                        <img src="../assets/images/profile-placeholder.jpg" alt="Profile" class="w-full h-full object-cover">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8" id="blocked-users-container">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Utilisateurs bloqués</h1>
+            <div class="flex space-x-2">
+                <button id="export-blocked" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition flex items-center">
+                    <i class="fas fa-download mr-2"></i>
+                    Exporter
+                </button>
+                <button id="clear-all-blocked" class="bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-lg transition flex items-center">
+                    <i class="fas fa-trash-alt mr-2"></i>
+                    Tout débloquer
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Total bloqué<span class="blocked-plural">s</span></p>
+                        <h2 class="text-3xl font-bold text-gray-900" id="blocked-count">0</h2>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+                        <i class="fas fa-ban text-red-500"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Bloqués ce mois</p>
+                        <h2 class="text-3xl font-bold text-gray-900">3</h2>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
+                        <i class="fas fa-calendar-alt text-orange-500"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Débloqués récemment</p>
+                        <h2 class="text-3xl font-bold text-gray-900">2</h2>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                        <i class="fas fa-unlock text-green-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
+                <div class="flex flex-wrap gap-2">
+                    <button class="filter-btn active-filter px-4 py-2 rounded-full bg-primary text-white" data-filter="all">Tous</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition" data-filter="harassment">Harcèlement</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition" data-filter="fake_profile">Faux profil</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition" data-filter="inappropriate">Contenu inapproprié</button>
+                    <button class="filter-btn px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition" data-filter="other">Autre</button>
+                </div>
+                <div class="relative w-full md:w-64">
+                    <input type="text" id="search-blocked" placeholder="Rechercher un utilisateur" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blocked Users List -->
+        <div class="space-y-4" id="blocked-users-list">
+            <!-- Empty State -->
+            <div class="empty-blocked-state hidden bg-white rounded-xl shadow-sm p-8 text-center">
+                <div class="w-20 h-20 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-check text-2xl text-gray-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Aucun utilisateur bloqué</h3>
+                <p class="text-gray-500 mb-6">Vous n'avez bloqué aucun utilisateur pour le moment.</p>
+                <a href="discover.html" class="inline-block bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">
+                    Découvrir des profils
+                </a>
+            </div>
+
+            <!-- Blocked User Item -->
+            <div class="blocked-user-item bg-white rounded-xl shadow-sm p-6" data-reason="harassment">
+                <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
+                            <img src="../assets/images/profile-1.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 user-name">Jean Dupont</h3>
+                            <p class="text-gray-500 user-info">28 ans, Abidjan</p>
+                            <div class="flex items-center mt-1">
+                                <span class="text-xs font-medium px-2 py-1 rounded-full bg-red-100 text-red-700">Harcèlement</span>
+                                <span class="text-xs text-gray-500 ml-2 block-date">Bloqué le 15/04/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="unblock-btn bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition flex items-center">
+                        <i class="fas fa-unlock mr-2"></i>
+                        Débloquer
+                    </button>
+                </div>
+            </div>
+
+            <!-- Blocked User Item -->
+            <div class="blocked-user-item bg-white rounded-xl shadow-sm p-6" data-reason="fake_profile">
+                <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
+                            <img src="../assets/images/profile-2.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 user-name">Marie Koné</h3>
+                            <p class="text-gray-500 user-info">24 ans, Yamoussoukro</p>
+                            <div class="flex items-center mt-1">
+                                <span class="text-xs font-medium px-2 py-1 rounded-full bg-orange-100 text-orange-700">Faux profil</span>
+                                <span class="text-xs text-gray-500 ml-2 block-date">Bloqué le 02/05/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="unblock-btn bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition flex items-center">
+                        <i class="fas fa-unlock mr-2"></i>
+                        Débloquer
+                    </button>
+                </div>
+            </div>
+
+            <!-- Blocked User Item -->
+            <div class="blocked-user-item bg-white rounded-xl shadow-sm p-6" data-reason="inappropriate">
+                <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
+                            <img src="../assets/images/profile-3.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 user-name">Paul Kouassi</h3>
+                            <p class="text-gray-500 user-info">32 ans, Bouaké</p>
+                            <div class="flex items-center mt-1">
+                                <span class="text-xs font-medium px-2 py-1 rounded-full bg-purple-100 text-purple-700">Contenu inapproprié</span>
+                                <span class="text-xs text-gray-500 ml-2 block-date">Bloqué le 10/05/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="unblock-btn bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition flex items-center">
+                        <i class="fas fa-unlock mr-2"></i>
+                        Débloquer
+                    </button>
+                </div>
+            </div>
+
+            <!-- Blocked User Item -->
+            <div class="blocked-user-item bg-white rounded-xl shadow-sm p-6" data-reason="other">
+                <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden">
+                            <img src="../assets/images/profile-4.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 user-name">Sophie Traoré</h3>
+                            <p class="text-gray-500 user-info">26 ans, Abidjan</p>
+                            <div class="flex items-center mt-1">
+                                <span class="text-xs font-medium px-2 py-1 rounded-full bg-gray-100 text-gray-700">Autre</span>
+                                <span class="text-xs text-gray-500 ml-2 block-date">Bloqué le 18/05/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="unblock-btn bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition flex items-center">
+                        <i class="fas fa-unlock mr-2"></i>
+                        Débloquer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modules JavaScript -->
+    <script src="../assets/js/modules/utils.js"></script>
+    <script src="../assets/js/modules/user-management.js"></script>
+    
+    <!-- Initialisation de l'application -->
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

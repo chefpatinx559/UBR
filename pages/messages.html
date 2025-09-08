@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - UBR</title>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Utilisation exclusive de Tailwind CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Tous les styles sont maintenant gérés par Tailwind CSS */
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i class="fas fa-cross text-2xl text-primary"></i>
+                        <span class="text-xl font-bold text-gray-800">UBR</span>
+                    </a>
+                </div>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="discover.html" class="text-gray-600 hover:text-primary transition">Découvrir</a>
+                    <a href="matches.html" class="text-gray-600 hover:text-primary transition">Mes Matches</a>
+                    <a href="messages.html" class="text-primary font-medium">Messages</a>
+                    <a href="profile.html" class="text-gray-600 hover:text-primary transition">Profil</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="notifications.html" class="relative text-gray-600 hover:text-primary transition">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </a>
+                    <a href="profile.html" class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto h-screen flex">
+        <!-- Conversations List -->
+        <div class="w-1/3 bg-white border-r border-gray-200 flex flex-col">
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center justify-between mb-4">
+                    <h1 class="text-xl font-bold text-gray-800">Messages</h1>
+                    <button class="text-primary hover:text-blue-700">
+                        <i class="fas fa-edit text-lg"></i>
+                    </button>
+                </div>
+                
+                <!-- Search -->
+                <div class="relative">
+                    <input type="text" placeholder="Rechercher une conversation..." 
+                           class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Conversations -->
+            <div class="flex-1 overflow-y-auto">
+                <!-- Conversation 1 - Active -->
+                <div class="conversation-item active p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-all duration-200 ease-in-out border-l-4 border-primary" data-conversation="sarah" data-conversation-id="1">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/50x50/10b981/ffffff?text=S" alt="Sarah" class="w-12 h-12 rounded-full object-cover">
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold text-gray-800 truncate">Sarah M.</h3>
+                                <span class="text-xs text-gray-500">14:32</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">Merci pour votre message ! Je suis très touchée...</p>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <span class="bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversation 2 -->
+                <div class="conversation-item p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-all duration-200 ease-in-out border-l-4 border-transparent hover:border-gray-200" data-conversation="grace" data-conversation-id="2">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/50x50/3b82f6/ffffff?text=G" alt="Grace" class="w-12 h-12 rounded-full object-cover">
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold text-gray-800 truncate">Grace K.</h3>
+                                <span class="text-xs text-gray-500">Hier</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">J'aimerais qu'on se rencontre bientôt...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversation 3 -->
+                <div class="conversation-item p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-all duration-200 ease-in-out border-l-4 border-transparent hover:border-gray-200" data-conversation="marie" data-conversation-id="3">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/50x50/f59e0b/ffffff?text=M" alt="Marie" class="w-12 h-12 rounded-full object-cover">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold text-gray-800 truncate">Marie L.</h3>
+                                <span class="text-xs text-gray-500">Lun</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">Votre profil m'a beaucoup plu...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversation 4 -->
+                <div class="conversation-item p-4 border-b border-gray-100 cursor-pointer" data-conversation="anne">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/50x50/8b5cf6/ffffff?text=A" alt="Anne" class="w-12 h-12 rounded-full">
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold text-gray-800 truncate">Anne P.</h3>
+                                <span class="text-xs text-gray-500">Dim</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">Pouvez-vous me parler de votre foi ?</p>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <span class="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversation 5 -->
+                <div class="conversation-item p-4 border-b border-gray-100 cursor-pointer" data-conversation="fatou">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/50x50/ef4444/ffffff?text=F" alt="Fatou" class="w-12 h-12 rounded-full">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold text-gray-800 truncate">Fatou D.</h3>
+                                <span class="text-xs text-gray-500">Sam</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">Merci pour votre intérêt...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="flex-1 flex flex-col">
+            <!-- Chat Header -->
+            <div class="bg-white border-b border-gray-200 p-4" id="chat-header">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <img src="https://via.placeholder.com/40x40/10b981/ffffff?text=S" alt="Sarah" class="w-10 h-10 rounded-full" id="conversation-avatar">
+                        <div>
+                            <h2 class="font-semibold text-gray-800" id="conversation-name">Sarah M.</h2>
+                            <p class="text-sm text-green-600" id="conversation-status">
+                                <i class="fas fa-circle mr-1"></i>En ligne
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition" id="call-button">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                        <button class="p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition" id="video-button">
+                            <i class="fas fa-video"></i>
+                        </button>
+                        <button class="p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition" id="options-button">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="flex-1 bg-gray-50 p-4 overflow-y-auto" id="messagesContainer">
+                <!-- Les messages seront chargés dynamiquement par le système de messagerie -->
+            </div>
+            
+            <!-- État vide (affiché quand aucune conversation n'est sélectionnée) -->
+            <div id="empty-state" class="flex-1 bg-gray-50 hidden flex items-center justify-center">
+                <div class="text-center">
+                    <i class="fas fa-comments text-5xl mb-4 text-gray-300"></i>
+                    <h3 class="text-lg font-semibold text-gray-700">Aucune conversation sélectionnée</h3>
+                    <p class="text-gray-500 mt-2">Sélectionnez une conversation pour commencer à échanger</p>
+                </div>
+            </div>
+
+            <!-- Message Input -->
+            <div class="bg-white border-t border-gray-200 p-4" id="message-input-container">
+                <div class="flex items-center space-x-3">
+                    <button class="p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition" id="attachment-button">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition" id="image-button">
+                        <i class="fas fa-image"></i>
+                    </button>
+                    <div class="flex-1 relative">
+                        <input type="text" id="message-input" placeholder="Tapez votre message..." 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent pr-12">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary hover:text-blue-700" id="send-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <button class="p-2 text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition" id="emoji-button">
+                        <i class="fas fa-smile"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de messagerie -->
+    <script src="../assets/js/messaging.js"></script>
+    <script src="../assets/js/messaging-init.js"></script>
+</body>
+</html>

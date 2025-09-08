@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Matches - UBR</title>
+    <link rel="stylesheet" href="../assets/css/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .compatibility-bar {
+            background: linear-gradient(90deg, #10b981 0%, #f59e0b 50%, #ef4444 100%);
+        }
+        .spiritual-badge {
+            background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+        }
+        .match-card {
+            transition: all 0.3s ease;
+        }
+        .match-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .compatibility-score {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i class="fas fa-cross text-2xl text-primary"></i>
+                        <span class="text-xl font-bold text-gray-800">UBR</span>
+                    </a>
+                </div>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="discover.html" class="text-gray-600 hover:text-primary transition">Découvrir</a>
+                    <a href="matches.html" class="text-primary font-medium">Mes Matches</a>
+                    <a href="messages.html" class="text-gray-600 hover:text-primary transition">Messages</a>
+                    <a href="profile.html" class="text-gray-600 hover:text-primary transition">Profil</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="notifications.html" class="relative text-gray-600 hover:text-primary transition">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </a>
+                    <a href="profile.html" class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Mes Matches Spirituels</h1>
+                    <p class="text-gray-600">Découvrez les profils les plus compatibles avec vos valeurs chrétiennes</p>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="bg-spiritual-badge text-white px-4 py-2 rounded-lg">
+                        <i class="fas fa-heart mr-2"></i>
+                        <span class="font-medium">Algorithme Spirituel Actif</span>
+                    </div>
+                    <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                        <i class="fas fa-sync mr-2"></i>Actualiser
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compatibility Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Matches Excellents</p>
+                        <p class="text-2xl font-bold text-green-600">12</p>
+                        <p class="text-xs text-gray-500">90%+ compatibilité</p>
+                    </div>
+                    <div class="p-3 bg-green-100 rounded-full">
+                        <i class="fas fa-star text-green-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Matches Très Bons</p>
+                        <p class="text-2xl font-bold text-blue-600">28</p>
+                        <p class="text-xs text-gray-500">75-89% compatibilité</p>
+                    </div>
+                    <div class="p-3 bg-blue-100 rounded-full">
+                        <i class="fas fa-heart text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Matches Bons</p>
+                        <p class="text-2xl font-bold text-yellow-600">45</p>
+                        <p class="text-xs text-gray-500">60-74% compatibilité</p>
+                    </div>
+                    <div class="p-3 bg-yellow-100 rounded-full">
+                        <i class="fas fa-thumbs-up text-yellow-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Nouveaux Aujourd'hui</p>
+                        <p class="text-2xl font-bold text-purple-600">7</p>
+                        <p class="text-xs text-gray-500">Basés sur vos critères</p>
+                    </div>
+                    <div class="p-3 bg-purple-100 rounded-full">
+                        <i class="fas fa-sparkles text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Filtres de Compatibilité</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Niveau de Compatibilité</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary">
+                        <option>Tous les niveaux</option>
+                        <option>Excellents (90%+)</option>
+                        <option>Très Bons (75-89%)</option>
+                        <option>Bons (60-74%)</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Valeurs Spirituelles</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary">
+                        <option>Toutes les valeurs</option>
+                        <option>Engagement chrétien fort</option>
+                        <option>Service à l'église</option>
+                        <option>Lecture biblique régulière</option>
+                        <option>Prière quotidienne</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Âge Compatible</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary">
+                        <option>Tous les âges</option>
+                        <option>20-25 ans</option>
+                        <option>26-30 ans</option>
+                        <option>31-35 ans</option>
+                        <option>36-40 ans</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Distance</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary">
+                        <option>Toutes distances</option>
+                        <option>0-10 km</option>
+                        <option>10-25 km</option>
+                        <option>25-50 km</option>
+                        <option>50+ km</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Matches Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Match 1 - Excellence -->
+            <div class="match-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/400x500/10b981/ffffff?text=Sarah+M" alt="Sarah M" class="w-full h-64 object-cover">
+                    
+                    <!-- Compatibility Score -->
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold compatibility-score">
+                        <i class="fas fa-star mr-1"></i>95%
+                    </div>
+                    
+                    <!-- Spiritual Badge -->
+                    <div class="absolute top-4 right-4 spiritual-badge text-white px-3 py-1 rounded-full text-sm font-medium">
+                        <i class="fas fa-cross mr-1"></i>Spirituel
+                    </div>
+                    
+                    <!-- Online Status -->
+                    <div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm">
+                        <i class="fas fa-circle mr-1"></i>En ligne
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Sarah M.</h3>
+                        <span class="text-gray-600">25 ans</span>
+                    </div>
+                    
+                    <!-- Compatibility Bar -->
+                    <div class="mb-4">
+                        <div class="flex justify-between text-xs text-gray-600 mb-1">
+                            <span>Compatibilité Spirituelle</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>Abidjan (5 km)
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Catholique
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Infirmière
+                        </p>
+                    </div>
+                    
+                    <!-- Spiritual Values -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Valeurs Communes</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Prière quotidienne</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Service à l'église</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Lecture biblique</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Famille chrétienne</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Passionnée par la médecine et l'aide aux autres. Je cherche un homme de Dieu pour construire une famille chrétienne..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match 2 - Très Bon -->
+            <div class="match-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/400x500/3b82f6/ffffff?text=Grace+K" alt="Grace K" class="w-full h-64 object-cover">
+                    
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                        <i class="fas fa-heart mr-1"></i>87%
+                    </div>
+                    
+                    <div class="absolute top-4 right-4 spiritual-badge text-white px-3 py-1 rounded-full text-sm font-medium">
+                        <i class="fas fa-cross mr-1"></i>Spirituel
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Grace K.</h3>
+                        <span class="text-gray-600">28 ans</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex justify-between text-xs text-gray-600 mb-1">
+                            <span>Compatibilité Spirituelle</span>
+                            <span>87%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 87%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>Bouaké (12 km)
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Protestante
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Enseignante
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Valeurs Communes</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Prière quotidienne</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Musique chrétienne</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Éducation</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Passionnée par l'éducation et la musique chrétienne. Je cherche un partenaire spirituel pour une relation sérieuse..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match 3 - Bon -->
+            <div class="match-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/400x500/f59e0b/ffffff?text=Marie+L" alt="Marie L" class="w-full h-64 object-cover">
+                    
+                    <div class="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                        <i class="fas fa-thumbs-up mr-1"></i>72%
+                    </div>
+                    
+                    <div class="absolute top-4 right-4 spiritual-badge text-white px-3 py-1 rounded-full text-sm font-medium">
+                        <i class="fas fa-cross mr-1"></i>Spirituel
+                    </div>
+                    
+                    <div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm">
+                        <i class="fas fa-circle mr-1"></i>En ligne
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Marie L.</h3>
+                        <span class="text-gray-600">26 ans</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex justify-between text-xs text-gray-600 mb-1">
+                            <span>Compatibilité Spirituelle</span>
+                            <span>72%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-yellow-500 h-2 rounded-full" style="width: 72%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>Yamoussoukro (8 km)
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Évangélique
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Architecte
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Valeurs Communes</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Créativité</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Art chrétien</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Foi</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Créative et passionnée par l'art. Je cherche un homme de foi pour partager une vie de couple équilibrée..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match 4 - Nouveau -->
+            <div class="match-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative">
+                <div class="absolute top-4 left-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold z-10">
+                    <i class="fas fa-sparkles mr-1"></i>Nouveau
+                </div>
+                
+                <div class="relative">
+                    <img src="https://via.placeholder.com/400x500/8b5cf6/ffffff?text=Anne+P" alt="Anne P" class="w-full h-64 object-cover">
+                    
+                    <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                        <i class="fas fa-star mr-1"></i>91%
+                    </div>
+                    
+                    <div class="absolute top-4 right-4 spiritual-badge text-white px-3 py-1 rounded-full text-sm font-medium" style="top: 2.5rem;">
+                        <i class="fas fa-cross mr-1"></i>Spirituel
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Anne P.</h3>
+                        <span class="text-gray-600">24 ans</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex justify-between text-xs text-gray-600 mb-1">
+                            <span>Compatibilité Spirituelle</span>
+                            <span>91%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 91%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>San Pedro (3 km)
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Pentecôtiste
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Médecin
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Valeurs Communes</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Service médical</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Prière fervente</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Évangélisation</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Dévouée à la médecine et à ma foi. Je cherche un partenaire qui partage mes valeurs chrétiennes..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match 5 -->
+            <div class="match-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/400x500/ef4444/ffffff?text=Fatou+D" alt="Fatou D" class="w-full h-64 object-cover">
+                    
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                        <i class="fas fa-heart mr-1"></i>84%
+                    </div>
+                    
+                    <div class="absolute top-4 right-4 spiritual-badge text-white px-3 py-1 rounded-full text-sm font-medium">
+                        <i class="fas fa-cross mr-1"></i>Spirituel
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Fatou D.</h3>
+                        <span class="text-gray-600">27 ans</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex justify-between text-xs text-gray-600 mb-1">
+                            <span>Compatibilité Spirituelle</span>
+                            <span>84%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 84%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>Abidjan (7 km)
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Catholique
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Avocate
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Valeurs Communes</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Justice</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Droits humains</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Foi</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Passionnée par la justice et les droits humains. Je cherche un homme de Dieu pour une relation sérieuse..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Match 6 -->
+            <div class="match-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/400x500/06b6d4/ffffff?text=Claire+M" alt="Claire M" class="w-full h-64 object-cover">
+                    
+                    <div class="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                        <i class="fas fa-thumbs-up mr-1"></i>68%
+                    </div>
+                    
+                    <div class="absolute top-4 right-4 spiritual-badge text-white px-3 py-1 rounded-full text-sm font-medium">
+                        <i class="fas fa-cross mr-1"></i>Spirituel
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-lg text-gray-800">Claire M.</h3>
+                        <span class="text-gray-600">29 ans</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex justify-between text-xs text-gray-600 mb-1">
+                            <span>Compatibilité Spirituelle</span>
+                            <span>68%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-yellow-500 h-2 rounded-full" style="width: 68%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-4">
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary"></i>Bouaké (15 km)
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-church mr-2 text-secondary"></i>Protestante
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            <i class="fas fa-briefcase mr-2 text-accent"></i>Psychologue
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Valeurs Communes</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Thérapie familiale</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Équilibre</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Foi</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                        "Spécialisée en thérapie familiale. Je cherche un partenaire pour construire une famille équilibrée..."
+                    </p>
+                    
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-times mr-1"></i>
+                        </button>
+                        <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-heart mr-1"></i>
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-8">
+            <button class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 transition duration-300 font-medium">
+                <i class="fas fa-sync mr-2"></i>Charger Plus de Matches
+            </button>
+        </div>
+    </main>
+
+    <!-- Script de gestion des matches -->
+    <script src="../assets/js/matches.js"></script>
+</body>
+</html>
