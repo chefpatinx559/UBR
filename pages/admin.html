@@ -1109,12 +1109,23 @@
         </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
     <!-- Modules JS pour admin.html -->
     <script src="../assets/js/modules/utils.js"></script>
     <script src="../assets/js/modules/user-management.js"></script>
     <script src="../assets/js/modules/reports.js"></script>
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/admin.js"></script>
+    <script>
+        // Vérifier l'authentification admin au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!window.authManager.requireAdmin()) {
+                return;
+            }
+        });
+    </script>
     <script>
       document.addEventListener('DOMContentLoaded', fetchAdminStats);
     </script>

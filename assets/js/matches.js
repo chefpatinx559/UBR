@@ -4,38 +4,114 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Vérifier l'authentification
+    if (!window.authManager.requireAuth()) {
+        return;
+    }
+
+    // Charger les matches depuis l'API
+    loadMatches();
+
     // Système de notification
     function showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
+        if (window.UBRUtils && typeof window.UBRUtils.showNotification === 'function') {
+            window.UBRUtils.showNotification(message, type);
+        }
+    }
+
+    // Charger les matches depuis l'API
+    async function loadMatches() {
+        try {
+            const response = await window.ubrApi.getMatches();
+            renderMatches(response.data);
+        } catch (error) {
+            console.error('Erreur lors du chargement des matches:', error);
+            showNotification('Erreur lors du chargement des matches', 'error');
+        }
+    }
+
+    // Afficher les matches dans l'interface
+    function renderMatches(matches) {
+        const container = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2');
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        matches.forEach(match => {
+            const matchCard = createMatchCard(match);
+            container.appendChild(matchCard);
+        });
+    }
+
+    // Créer une carte de match
+    function createMatchCard(match) {
+        const user = match.matched_user;
+        const card = document.createElement('div');
+        card.className = 'match-card bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden';
         
-        const colors = {
-            success: 'bg-green-500 text-white',
-            error: 'bg-red-500 text-white',
-            warning: 'bg-yellow-500 text-white',
-            info: 'bg-blue-500 text-white'
-        };
-        
-        notification.className += ` ${colors[type]}`;
-        notification.innerHTML = `
-            <div class="flex items-center">
-                <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'times' : type === 'warning' ? 'exclamation-triangle' : 'info'} mr-2"></i>
-                <span>${message}</span>
+        const photoUrl = user.primary_photo?.path 
+            ? `http://localhost:8000/storage/${user.primary_photo.path}`
+            : `https://via.placeholder.com/400x500/10b981/ffffff?text=${user.first_name}`;
+
+        const compatibilityScore = Math.round(match.compatibility_score || 0);
+        let scoreColor = 'bg-yellow-500';
+        if (compatibilityScore >= 90) scoreColor = 'bg-green-500';
+        else if (compatibilityScore >= 75) scoreColor = 'bg-blue-500';
+
+        card.innerHTML = `
+            <div class="relative">
+                <img src="${photoUrl}" alt="${user.first_name}" class="w-full h-64 object-cover">
+                <div class="absolute top-4 left-4 ${scoreColor} text-white px-3 py-1 rounded-full text-sm font-bold compatibility-score">
+                    <i class="fas fa-star mr-1"></i>${compatibilityScore}%
+                </div>
+                <div class="absolute top-4 right-4 spiritual-badge text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <i class="fas fa-cross mr-1"></i>Spirituel
+                </div>
+                ${user.is_online ? '<div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm"><i class="fas fa-circle mr-1"></i>En ligne</div>' : ''}
+            </div>
+            
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-semibold text-lg text-gray-800">${user.first_name} ${user.last_name.charAt(0)}.</h3>
+                    <span class="text-gray-600">${user.age} ans</span>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between text-xs text-gray-600 mb-1">
+                        <span>Compatibilité Spirituelle</span>
+                        <span>${compatibilityScore}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="${scoreColor.replace('bg-', 'bg-')} h-2 rounded-full" style="width: ${compatibilityScore}%"></div>
+                    </div>
+                </div>
+                
+                <div class="space-y-2 mb-4">
+                    <p class="text-gray-600 text-sm">
+                        <i class="fas fa-map-marker-alt mr-2 text-primary"></i>${user.city}
+                    </p>
+                    <p class="text-gray-600 text-sm">
+                        <i class="fas fa-church mr-2 text-secondary"></i>${user.denomination}
+                    </p>
+                    ${user.profession ? `<p class="text-gray-600 text-sm"><i class="fas fa-briefcase mr-2 text-accent"></i>${user.profession}</p>` : ''}
+                </div>
+                
+                <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+                    ${user.about_me || 'Aucune description disponible...'}
+                </p>
+                
+                <div class="flex space-x-2">
+                    <button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition duration-300 flex items-center justify-center" onclick="startConversation(${user.id})">
+                        <i class="fas fa-comment mr-1"></i>Message
+                    </button>
+                    <button class="px-3 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition duration-300" onclick="viewFullProfile(${user.id})">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
             </div>
         `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.classList.remove('translate-x-full');
-        }, 100);
-        
-        setTimeout(() => {
-            notification.classList.add('translate-x-full');
-            setTimeout(() => {
-                notification.remove();
-            }, 300);
-        }, 3000);
+
+        return card;
     }
 
     // Gestion des boutons de match
@@ -74,24 +150,27 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('select').forEach(select => {
         select.addEventListener('change', function() {
             showNotification('Filtres de compatibilité appliqués', 'info');
+            loadMatches();
         });
     });
 
     // Bouton d'actualisation
-    document.querySelector('.bg-primary.text-white').addEventListener('click', function() {
-        showNotification('Actualisation des matches en cours...', 'info');
-        setTimeout(() => {
-            showNotification('Nouveaux matches trouvés !', 'success');
-        }, 2000);
-    });
+    const refreshBtn = document.querySelector('.bg-primary.text-white');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            showNotification('Actualisation des matches en cours...', 'info');
+            loadMatches();
+        });
+    }
 
     // Bouton "Charger Plus"
-    document.querySelector('.px-8.py-3').addEventListener('click', function() {
-        showNotification('Chargement de nouveaux matches...', 'info');
-        setTimeout(() => {
-            showNotification('3 nouveaux matches ajoutés !', 'success');
-        }, 1500);
-    });
+    const loadMoreBtn = document.querySelector('.px-8.py-3');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            showNotification('Chargement de nouveaux matches...', 'info');
+            loadMatches();
+        });
+    }
 
     // Animation des scores de compatibilité
     document.querySelectorAll('.compatibility-score').forEach(score => {
@@ -104,3 +183,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Fonctions globales pour les interactions
+window.startConversation = function(userId) {
+    window.location.href = `messages.html?user=${userId}`;
+};
+
+window.viewFullProfile = function(userId) {
+    window.location.href = `profile-view.html?id=${userId}`;
+};

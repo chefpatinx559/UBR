@@ -10,7 +10,7 @@ class MessagingSystem {
         this.messages = {};
         this.currentUser = this.getCurrentUser();
         this.activeConversation = null;
-        this.apiBaseUrl = 'http://localhost:5000/api';
+        this.api = window.ubrApi;
         this.config = config;
         
         // Initialisation automatique si les éléments sont fournis
@@ -30,6 +30,7 @@ class MessagingSystem {
         this.conversationStatus = this.config.conversationStatus;
         this.conversationAvatar = this.config.conversationAvatar;
         this.searchInput = this.config.searchInput;
+        this.messagesList = this.messagesContainer;
         
         // Initialiser les écouteurs d'événements
         this.initEventListeners();
@@ -55,6 +56,7 @@ class MessagingSystem {
         this.conversationStatus = document.getElementById('conversation-status');
         this.conversationAvatar = document.getElementById('conversation-avatar');
         this.messagesContainer = document.getElementById('messagesContainer');
+        this.messagesList = this.messagesContainer;
         this.emptyState = document.getElementById('empty-state');
     }
     
@@ -69,100 +71,72 @@ class MessagingSystem {
         });
         
         // Envoi de message
-        this.sendButton.addEventListener('click', () => {
-            this.sendMessage();
-        });
+        if (this.sendButton) {
+            this.sendButton.addEventListener('click', () => {
+                this.sendMessage();
+            });
+        }
         
         // Envoi avec la touche Entrée
-        this.messageInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                this.sendMessage();
-            }
-        });
+        if (this.messageInput) {
+            this.messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.sendMessage();
+                }
+            });
+        }
     }
     
     // Obtenir l'utilisateur actuel (simulé)
     getCurrentUser() {
-        // Dans une application réelle, cela viendrait d'une session authentifiée
-        return {
-            id: 'current-user',
-            name: 'Vous',
-            avatar: 'https://via.placeholder.com/50x50/2563eb/ffffff?text=V'
-        };
-    }
-    
-    // Récupérer le token d'authentification
-    getAuthToken() {
-        return localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
-    }
-    
-    // Effectuer une requête API authentifiée
-    async fetchAPI(endpoint, method = 'GET', body = null) {
-        const token = this.getAuthToken();
-        if (!token) {
-            console.error('Aucun token d\'authentification trouvé');
-            return null;
+        const userInfo = localStorage.getItem('userInfo') || sessionStorage.getItem('userInfo');
+        if (userInfo) {
+            return JSON.parse(userInfo);
         }
-        
-        try {
-            const options = {
-                method,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            };
-            
-            if (body) {
-                options.body = JSON.stringify(body);
-            }
-            
-            const response = await fetch(`${this.apiBaseUrl}${endpoint}`, options);
-            
-            if (!response.ok) {
-                throw new Error(`Erreur API: ${response.status}`);
-            }
-            
-            return await response.json();
-        } catch (error) {
-            console.error('Erreur lors de la requête API:', error);
-            return null;
-        }
+        return null;
     }
     
     // Récupérer les conversations depuis l'API
     async fetchConversations() {
-        const conversations = await this.fetchAPI('/messages/conversations');
+        try {
+            const conversations = await this.api.getConversations();
         
-        if (conversations && conversations.length > 0) {
-            // Mettre à jour l'interface avec les conversations
-            this.updateConversationsUI(conversations);
-            
-            // Activer la première conversation par défaut
-            if (this.conversationItems.length > 0) {
-                const firstConversation = this.conversationItems[0].getAttribute('data-conversation');
-                this.setActiveConversation(firstConversation);
+            if (conversations && conversations.length > 0) {
+                // Mettre à jour l'interface avec les conversations
+                this.updateConversationsUI(conversations);
+                
+                // Activer la première conversation par défaut
+                if (conversations.length > 0) {
+                    this.setActiveConversation(conversations[0].id);
+                }
+            } else {
+                this.showEmptyState();
             }
-        } else {
-            // Afficher un message si aucune conversation n'est disponible
-            if (this.emptyState) {
-                this.emptyState.classList.remove('hidden');
-                this.emptyState.innerHTML = `
-                    <div class="text-center p-6">
-                        <i class="fas fa-comments text-gray-300 text-5xl mb-4"></i>
-                        <h3 class="text-xl font-semibold text-gray-600 mb-2">Aucune conversation</h3>
-                        <p class="text-gray-500">Commencez à discuter avec d'autres membres pour voir vos conversations ici.</p>
-                    </div>
-                `;
-            }
-            if (this.chatContainer) this.chatContainer.classList.add('hidden');
+        } catch (error) {
+            console.error('Erreur lors du chargement des conversations:', error);
+            this.showEmptyState();
         }
+    }
+    
+    // Afficher l'état vide
+    showEmptyState() {
+        if (this.emptyState) {
+            this.emptyState.classList.remove('hidden');
+            this.emptyState.innerHTML = `
+                <div class="text-center p-6">
+                    <i class="fas fa-comments text-gray-300 text-5xl mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-600 mb-2">Aucune conversation</h3>
+                    <p class="text-gray-500">Commencez à discuter avec d'autres membres pour voir vos conversations ici.</p>
+                </div>
+            `;
+        }
+        if (this.chatContainer) this.chatContainer.classList.add('hidden');
     }
     
     // Mettre à jour l'interface des conversations
     updateConversationsUI(conversations) {
-        const conversationsList = document.querySelector('.conversations-list');
+        const conversationsList = document.querySelector('.flex-1.overflow-y-auto');
         if (!conversationsList) return;
         
         // Vider la liste des conversations
@@ -170,31 +144,38 @@ class MessagingSystem {
         
         // Ajouter chaque conversation à la liste
         conversations.forEach(conversation => {
-            const { user, lastMessage } = conversation;
-            const isOnline = user.isOnline;
-            const formattedTime = new Date(lastMessage.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const otherUser = conversation.other_user;
+            const lastMessage = conversation.last_message;
+            const isOnline = otherUser.is_online;
+            const formattedTime = lastMessage ? new Date(lastMessage.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+            const photoUrl = otherUser.primary_photo?.path 
+                ? `http://localhost:8000/storage/${otherUser.primary_photo.path}`
+                : `https://via.placeholder.com/50x50/10b981/ffffff?text=${otherUser.first_name.charAt(0)}`;
             
             const conversationItem = document.createElement('div');
-            conversationItem.className = 'conversation-item flex items-center p-4 border-l-4 border-transparent hover:bg-gray-50 cursor-pointer transition-all';
-            conversationItem.setAttribute('data-conversation', user.id);
+            conversationItem.className = 'conversation-item p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-all duration-200 ease-in-out border-l-4 border-transparent hover:border-gray-200';
+            conversationItem.setAttribute('data-conversation-id', conversation.id);
+            conversationItem.setAttribute('data-user-id', otherUser.id);
             
             conversationItem.innerHTML = `
-                <div class="relative mr-3">
-                    <img src="${user.profilePicture || '../assets/images/default-avatar.png'}" alt="${user.firstName}" class="w-12 h-12 rounded-full object-cover">
-                    <span class="absolute bottom-0 right-0 w-3 h-3 ${isOnline ? 'bg-green-500' : 'bg-gray-400'} rounded-full border-2 border-white"></span>
-                </div>
-                <div class="flex-1 min-w-0">
-                    <div class="flex justify-between items-center">
-                        <h3 class="font-semibold text-gray-900 truncate">${user.firstName} ${user.lastName}</h3>
-                        <span class="text-xs text-gray-500">${formattedTime}</span>
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <img src="${photoUrl}" alt="${otherUser.first_name}" class="w-12 h-12 rounded-full object-cover">
+                        ${isOnline ? '<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>' : ''}
                     </div>
-                    <p class="text-sm text-gray-600 truncate">${lastMessage.content}</p>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-gray-800 truncate">${otherUser.first_name} ${otherUser.last_name.charAt(0)}.</h3>
+                            <span class="text-xs text-gray-500">${formattedTime}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 truncate">${lastMessage ? lastMessage.content : 'Aucun message'}</p>
+                    </div>
+                    ${conversation.unread_count > 0 ? `<div class="flex flex-col items-end"><span class="bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">${conversation.unread_count}</span></div>` : ''}
                 </div>
-                ${!lastMessage.isRead && !lastMessage.isSent ? '<span class="bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-2">1</span>' : ''}
             `;
             
             conversationItem.addEventListener('click', () => {
-                this.setActiveConversation(user.id);
+                this.setActiveConversation(conversation.id);
             });
             
             conversationsList.appendChild(conversationItem);
@@ -204,24 +185,11 @@ class MessagingSystem {
         this.conversationItems = document.querySelectorAll('.conversation-item');
     }
     
-    // Obtenir l'utilisateur actuel depuis le stockage local
-    getCurrentUser() {
-        const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
-        if (!userStr) return { id: 'current-user', firstName: 'Utilisateur', lastName: 'Actuel' };
-        
-        try {
-            return JSON.parse(userStr);
-        } catch (e) {
-            console.error('Erreur lors de la récupération des données utilisateur:', e);
-            return { id: 'current-user', firstName: 'Utilisateur', lastName: 'Actuel' };
-        }
-    }
-    
     // Définir la conversation active
     async setActiveConversation(conversationId) {
         // Mettre à jour la classe active
         this.conversationItems.forEach(item => {
-            if (item.getAttribute('data-conversation') === conversationId) {
+            if (item.getAttribute('data-conversation-id') == conversationId) {
                 item.classList.add('bg-gray-100');
                 item.classList.remove('border-transparent');
                 item.classList.add('border-primary');
@@ -250,17 +218,17 @@ class MessagingSystem {
     
     // Mettre à jour les informations de la conversation (titre, statut, avatar)
     updateConversationInfo(conversationId) {
-        const conversationItem = document.querySelector(`[data-conversation="${conversationId}"]`);
+        const conversationItem = document.querySelector(`[data-conversation-id="${conversationId}"]`);
         if (!conversationItem) return;
         
         const name = conversationItem.querySelector('h3').textContent;
         const avatar = conversationItem.querySelector('img').src;
         const isOnline = conversationItem.querySelector('.bg-green-500') !== null;
         
-        if (this.conversationTitle) this.conversationTitle.textContent = name;
+        if (this.conversationName) this.conversationName.textContent = name;
         if (this.conversationStatus) {
-            this.conversationStatus.textContent = isOnline ? 'En ligne' : 'Hors ligne';
-            this.conversationStatus.className = isOnline ? 'text-green-500' : 'text-gray-500';
+            this.conversationStatus.innerHTML = isOnline ? '<i class="fas fa-circle mr-1"></i>En ligne' : '<i class="fas fa-circle mr-1"></i>Hors ligne';
+            this.conversationStatus.className = isOnline ? 'text-sm text-green-600' : 'text-sm text-gray-500';
         }
         if (this.conversationAvatar) this.conversationAvatar.src = avatar;
     }
@@ -279,33 +247,44 @@ class MessagingSystem {
             </div>
         `;
         
-        // Récupérer les messages depuis l'API
-        const messages = await this.fetchAPI(`/messages/${conversationId}`);
+        try {
+            // Récupérer les messages depuis l'API
+            const response = await this.api.getMessages(conversationId);
+            const messages = response.data || [];
         
-        // Vider à nouveau la liste des messages
-        this.messagesList.innerHTML = '';
+            // Vider à nouveau la liste des messages
+            this.messagesList.innerHTML = '';
         
-        if (!messages || messages.length === 0) {
-            // Afficher un message si aucun message n'est disponible
+            if (!messages || messages.length === 0) {
+                // Afficher un message si aucun message n'est disponible
+                this.messagesList.innerHTML = `
+                    <div class="text-center p-6">
+                        <p class="text-gray-500">Aucun message. Commencez la conversation !</p>
+                    </div>
+                `;
+                return;
+            }
+        
+            // Stocker les messages dans la mémoire locale
+            this.messages[conversationId] = messages;
+        
+            // Afficher chaque message
+            messages.forEach(message => {
+                const isSent = message.sender_id == this.currentUser.id;
+                const messageElement = this.createMessageElement(message, isSent);
+                this.messagesList.appendChild(messageElement);
+            });
+        
+            // Faire défiler jusqu'au dernier message
+            this.scrollToBottom();
+        } catch (error) {
+            console.error('Erreur lors du chargement des messages:', error);
             this.messagesList.innerHTML = `
                 <div class="text-center p-6">
-                    <p class="text-gray-500">Aucun message. Commencez la conversation !</p>
+                    <p class="text-red-500">Erreur lors du chargement des messages</p>
                 </div>
             `;
-            return;
         }
-        
-        // Stocker les messages dans la mémoire locale
-        this.messages[conversationId] = messages;
-        
-        // Afficher chaque message
-        messages.forEach(message => {
-            const messageElement = this.createMessageElement(message, message.isSent);
-            this.messagesList.appendChild(messageElement);
-        });
-        
-        // Faire défiler jusqu'au dernier message
-        this.scrollToBottom();
     }
     
     // Créer un élément de message
@@ -313,7 +292,7 @@ class MessagingSystem {
         const messageDiv = document.createElement('div');
         messageDiv.className = `flex ${isSent ? 'justify-end' : 'justify-start'} mb-4`;
         
-        const timestamp = new Date(message.timestamp);
+        const timestamp = new Date(message.created_at);
         const formattedTime = timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         
         messageDiv.innerHTML = `
@@ -334,6 +313,15 @@ class MessagingSystem {
         
         const content = this.messageInput.value.trim();
         if (!content) return;
+
+        // Obtenir l'ID de l'utilisateur destinataire
+        const activeConversationItem = document.querySelector(`[data-conversation-id="${this.activeConversation}"]`);
+        const receiverId = activeConversationItem?.getAttribute('data-user-id');
+        
+        if (!receiverId) {
+            console.error('ID du destinataire non trouvé');
+            return;
+        }
         
         // Désactiver le bouton d'envoi pendant l'envoi
         if (this.sendButton) {
@@ -341,42 +329,45 @@ class MessagingSystem {
             this.sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
         }
         
-        // Préparer les données du message
-        const messageData = {
-            receiverId: this.activeConversation,
-            content: content
-        };
+        try {
+            // Envoyer le message à l'API
+            const response = await this.api.sendMessage(receiverId, content);
         
-        // Envoyer le message à l'API
-        const response = await this.fetchAPI('/messages', 'POST', messageData);
-        
-        // Réactiver le bouton d'envoi
-        if (this.sendButton) {
-            this.sendButton.disabled = false;
-            this.sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
-        }
-        
-        if (response) {
-            // Ajouter le message à la conversation locale
-            if (!this.messages[this.activeConversation]) {
-                this.messages[this.activeConversation] = [];
+            // Réactiver le bouton d'envoi
+            if (this.sendButton) {
+                this.sendButton.disabled = false;
+                this.sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
             }
-            this.messages[this.activeConversation].push(response);
+        
+            if (response) {
+                // Ajouter le message à la conversation locale
+                if (!this.messages[this.activeConversation]) {
+                    this.messages[this.activeConversation] = [];
+                }
+                this.messages[this.activeConversation].push(response.data);
+                
+                // Afficher le nouveau message
+                const messageElement = this.createMessageElement(response.data, true);
+                if (this.messagesList) {
+                    this.messagesList.appendChild(messageElement);
+                    this.scrollToBottom();
+                }
+                
+                // Vider le champ de saisie
+                this.messageInput.value = '';
+                
+                // Mettre à jour la liste des conversations
+                this.fetchConversations();
+            }
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi du message:', error);
             
-            // Afficher le nouveau message
-            const messageElement = this.createMessageElement(response, true);
-            if (this.messagesList) {
-                this.messagesList.appendChild(messageElement);
-                this.scrollToBottom();
+            // Réactiver le bouton d'envoi
+            if (this.sendButton) {
+                this.sendButton.disabled = false;
+                this.sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
             }
             
-            // Vider le champ de saisie
-            this.messageInput.value = '';
-            
-            // Mettre à jour la liste des conversations
-            this.fetchConversations();
-        } else {
-            // Afficher un message d'erreur
             alert('Erreur lors de l\'envoi du message. Veuillez réessayer.');
         }
     }

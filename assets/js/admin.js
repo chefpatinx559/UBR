@@ -327,58 +327,50 @@ function initializeCharts() {
 }
 
 async function fetchAdminStats() {
-  try {
-    const res = await fetch('/api/admin/stats', {
-      method: 'GET',
-      headers: {
-        'x-admin-token': 'monSuperTokenSecret' // Mets la même valeur que dans ton .env
-      }
-    });
-    if (!res.ok) throw new Error('Erreur API');
-    const stats = await res.json();
-    document.getElementById('user-count').textContent = stats.userCount ?? '-';
-    document.getElementById('message-count').textContent = stats.messageCount ?? '-';
-    document.getElementById('match-count').textContent = stats.matchCount ?? '-';
-  } catch (err) {
-    document.getElementById('user-count').textContent = '-';
-    document.getElementById('message-count').textContent = '-';
-    document.getElementById('match-count').textContent = '-';
-    alert('Impossible de charger les statistiques admin');
-  }
+    try {
+        const stats = await window.ubrApi.getAdminStats();
+        
+        // Mettre à jour les statistiques dans l'interface
+        const userCountEl = document.getElementById('user-count');
+        const messageCountEl = document.getElementById('message-count');
+        const matchCountEl = document.getElementById('match-count');
+        
+        if (userCountEl) userCountEl.textContent = stats.users?.total ?? '-';
+        if (messageCountEl) messageCountEl.textContent = stats.messages?.total ?? '-';
+        if (matchCountEl) matchCountEl.textContent = stats.matches?.total ?? '-';
+        
+    } catch (err) {
+        console.error('Erreur lors du chargement des statistiques:', err);
+        const userCountEl = document.getElementById('user-count');
+        const messageCountEl = document.getElementById('message-count');
+        const matchCountEl = document.getElementById('match-count');
+        
+        if (userCountEl) userCountEl.textContent = '-';
+        if (messageCountEl) messageCountEl.textContent = '-';
+        if (matchCountEl) matchCountEl.textContent = '-';
+    }
 }
 
 async function fetchAdminUsers() {
     try {
         showLoading(true); // Afficher un indicateur de chargement
         
-        const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
-        if (!token) {
-            window.location.href = 'admin-login.html';
-            return;
-        }
 
-        const response = await fetch('/api/admin/users', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
 
-        if (!response.ok) {
-            if (response.status === 401) {
-                // Token expiré ou invalide
-                window.location.href = 'admin-login.html';
-                return;
-            }
-            throw new Error('Erreur lors de la récupération des utilisateurs');
-        }
 
-        const data = await response.json();
-        updateUsersTable(data.users);
+        const response = await window.ubrApi.getAdminUsers();
+        updateUsersTable(response.data);
         
     } catch (error) {
         console.error('Erreur fetchAdminUsers:', error);
-        showNotification('Impossible de charger les utilisateurs. Veuillez réessayer.', 'error');
+        
+        // Vérifier si c'est une erreur d'authentification
+        if (error.message.includes('401') || error.message.includes('403')) {
+            window.location.href = 'admin-login.html';
+            return;
+        }
+        
+        showNotification('Impossible de charger les utilisateurs.', 'error');
     } finally {
         showLoading(false); // Cacher l'indicateur de chargement
     }
@@ -404,35 +396,39 @@ function showLoading(show) {
   
     // Remplir avec les nouveaux utilisateurs
     users.forEach(user => {
+      const photoUrl = user.primary_photo?.path 
+        ? `http://localhost:8000/storage/${user.primary_photo.path}`
+        : 'https://via.placeholder.com/40';
+        
       const row = document.createElement('tr');
       row.innerHTML = `
         <td class="px-6 py-4 whitespace-nowrap">
           <div class="flex items-center">
             <div class="flex-shrink-0 h-10 w-10">
-              <img class="h-10 w-10 rounded-full" src="${user.photo || 'https://via.placeholder.com/40'}" alt="">
+              <img class="h-10 w-10 rounded-full" src="${photoUrl}" alt="">
             </div>
             <div class="ml-4">
-              <div class="text-sm font-medium text-gray-900">${user.firstName} ${user.lastName}</div>
+              <div class="text-sm font-medium text-gray-900">${user.first_name} ${user.last_name}</div>
               <div class="text-sm text-gray-500">${user.email}</div>
             </div>
           </div>
         </td>
         <td class="px-6 py-4 whitespace-nowrap">
           <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-            ${user.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
-            ${user.isActive ? 'Actif' : 'Inactif'}
+            ${user.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+            ${user.is_active ? 'Actif' : 'Inactif'}
           </span>
         </td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          ${new Date(user.createdAt).toLocaleDateString()}
+          ${new Date(user.created_at).toLocaleDateString()}
         </td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-          <button class="view-btn text-blue-600 hover:text-blue-900 mr-4" data-user-id="${user._id}">Voir</button>
-          <button class="suspend-btn ${user.isActive ? 'text-yellow-600 hover:text-yellow-900' : 'text-green-600 hover:text-green-900'} mr-4" 
-                  data-user-id="${user._id}">
-            ${user.isActive ? 'Suspendre' : 'Activer'}
+          <button class="view-btn text-blue-600 hover:text-blue-900 mr-4" data-user-id="${user.id}">Voir</button>
+          <button class="suspend-btn ${user.is_active ? 'text-yellow-600 hover:text-yellow-900' : 'text-green-600 hover:text-green-900'} mr-4" 
+                  data-user-id="${user.id}">
+            ${user.is_active ? 'Suspendre' : 'Activer'}
           </button>
-          <button class="delete-btn text-red-600 hover:text-red-900" data-user-id="${user._id}">Supprimer</button>
+          <button class="delete-btn text-red-600 hover:text-red-900" data-user-id="${user.id}">Supprimer</button>
         </td>
       `;
       tbody.appendChild(row);
@@ -460,17 +456,10 @@ function showLoading(show) {
         const isSuspending = e.target.textContent.trim() === 'Suspendre';
         
         try {
-          const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
-          const response = await fetch(`/api/admin/users/${userId}/suspend`, {
+          await window.ubrApi.request(`/admin/users/${userId}/suspend`, {
             method: 'PUT',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            },
             body: JSON.stringify({ suspended: isSuspending })
           });
-  
-          if (!response.ok) throw new Error('Échec de la mise à jour');
           
           showNotification(`Utilisateur ${isSuspending ? 'suspendu' : 'réactivé'} avec succès`, 'success');
           // Recharger la liste des utilisateurs
@@ -492,15 +481,9 @@ function showLoading(show) {
         }
   
         try {
-          const token = localStorage.getItem('adminToken') || sessionStorage.getItem('adminToken');
-          const response = await fetch(`/api/admin/users/${userId}`, {
-            method: 'DELETE',
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
+          await window.ubrApi.request(`/admin/users/${userId}`, {
+            method: 'DELETE'
           });
-  
-          if (!response.ok) throw new Error('Échec de la suppression');
           
           showNotification('Utilisateur supprimé avec succès', 'success');
           // Recharger la liste des utilisateurs
@@ -515,10 +498,16 @@ function showLoading(show) {
 
   // Appeler fetchAdminUsers quand la page est chargée
 document.addEventListener('DOMContentLoaded', function() {
+    // Vérifier l'authentification admin
+    if (!window.authManager.requireAdmin()) {
+        return;
+    }
+
     // Vérifier si on est sur la page de gestion des utilisateurs
     if (document.getElementById('users-content')) {
       // Charger les utilisateurs immédiatement
       fetchAdminUsers();
+      fetchAdminStats();
       
       // Configurer le rafraîchissement automatique toutes les 30 secondes
       setInterval(fetchAdminUsers, 30000);

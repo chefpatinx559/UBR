@@ -3,26 +3,7 @@
  * Gère la validation du formulaire, l'inscription et le stockage des tokens
  */
 
-window.addEventListener('load', function() {
-    const canRegister = sessionStorage.getItem('canRegister');
-    const paymentData = sessionStorage.getItem('paymentData');
-    
-    if (!canRegister || !paymentData) {
-        alert('Vous devez d\'abord souscrire à un abonnement pour vous inscrire.');
-        window.location.href = 'buy.html';
-        return;
-    }
-    
-    // Afficher le plan souscrit
-    const data = JSON.parse(paymentData);
-    const planInfo = document.createElement('div');
-    planInfo.className = 'bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded-lg mb-4';
-    planInfo.innerHTML = `
-        <i class="fas fa-info-circle mr-2"></i>
-        Plan souscrit: <strong>${data.plan}</strong> (${data.price.toLocaleString('fr-FR')} FCFA)
-    `;
-    document.querySelector('form').insertBefore(planInfo, document.querySelector('form').firstChild);
-
+document.addEventListener('DOMContentLoaded', function() {
     // Gestion du formulaire d'inscription
     const form = document.getElementById('registerForm');
     const errorMessage = document.getElementById('errorMessage');
@@ -72,21 +53,18 @@ window.addEventListener('load', function() {
             return;
         }
         
-        // Récupérer les données d'abonnement
-        const paymentData = JSON.parse(sessionStorage.getItem('paymentData'));
-        const subscription = paymentData.plan.toLowerCase();
-        
         // Appel à l'API d'inscription
         registerUser({
             firstName,
             lastName,
             email,
             password,
+            password_confirmation: confirmPassword,
             dateOfBirth,
             gender,
             city,
             denomination,
-            subscription
+            subscription: 'discovery' // Plan par défaut
         });
     });
 
@@ -98,7 +76,7 @@ window.addEventListener('load', function() {
         }, 5000);
     }
 
-    function registerUser(userData) {
+    async function registerUser(userData) {
         // Afficher l'état de chargement
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
@@ -106,50 +84,24 @@ window.addEventListener('load', function() {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Inscription en cours...';
         submitBtn.disabled = true;
 
-        // Appel à l'API d'inscription
-        fetch('http://localhost:5000/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(data => Promise.reject(data));
-            }
-            return response.json();
-        })
-        .then(data => {
+        try {
+            // Utiliser le gestionnaire d'authentification
+            const response = await window.authManager.register(userData);
+            
             // Inscription réussie
             submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Inscription réussie';
             submitBtn.classList.remove('bg-secondary', 'hover:bg-green-700');
             submitBtn.classList.add('bg-green-600', 'hover:bg-green-700');
             
-            // Stocker le token dans sessionStorage
-            sessionStorage.setItem('userToken', data.token);
-            sessionStorage.setItem('userInfo', JSON.stringify({
-                id: data._id,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                email: data.email,
-                isAdmin: data.isAdmin
-            }));
-            
-            // Nettoyer les données de paiement
-            sessionStorage.removeItem('canRegister');
-            sessionStorage.removeItem('paymentData');
-            
             setTimeout(() => {
                 window.location.href = 'profile.html';
             }, 1000);
-        })
-        .catch(error => {
+        } catch (error) {
             // Échec de l'inscription
             console.error('Erreur d\'inscription:', error);
-            showError(error.message || 'Erreur lors de l\'inscription. Veuillez réessayer.');
+            showError(error.message || 'Erreur lors de l\'inscription.');
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
-        });
+        }
     }
 });

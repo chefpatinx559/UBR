@@ -109,6 +109,37 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-16 scroll-animate">
                 <h2 class="font-poppins text-4xl font-bold text-gray-800 mb-4">
+                <!-- Champ sujet ajouté -->
+                <div>
+                  <label for="subject" class="block text-gray-700 font-medium mb-2">Sujet</label>
+                  <select id="subject" name="subject" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="">Sélectionnez un sujet</option>
+                    <option value="question">Question générale</option>
+                    <option value="support">Support technique</option>
+                    <option value="billing">Facturation</option>
+                    <option value="feedback">Commentaires</option>
+                    <option value="other">Autre</option>
+                  </select>
+                </div>
+
+                <!-- Champ urgence ajouté -->
+                <div>
+                  <label class="block text-gray-700 font-medium mb-2">Niveau d'urgence</label>
+                  <div class="flex space-x-4">
+                    <label class="inline-flex items-center">
+                      <input type="radio" name="urgency" value="low" class="form-radio text-primary" checked>
+                      <span class="ml-2 text-sm text-gray-700">Faible</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                      <input type="radio" name="urgency" value="medium" class="form-radio text-primary">
+                      <span class="ml-2 text-sm text-gray-700">Moyen</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                      <input type="radio" name="urgency" value="high" class="form-radio text-primary">
+                      <span class="ml-2 text-sm text-gray-700">Élevé</span>
+                    </label>
+                  </div>
+                </div>
                     Plusieurs moyens de nous joindre
                 </h2>
                 <p class="text-xl text-gray-600">
@@ -324,6 +355,11 @@
             </div>
           </div>
           <div class="flex items-center space-x-3">
+                <!-- Case à cocher pour copie -->
+                <div class="flex items-center">
+                  <input type="checkbox" id="copy" name="copy" class="form-checkbox text-primary">
+                  <label for="copy" class="ml-2 text-sm text-gray-700">Recevoir une copie par email</label>
+                </div>
             <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-white font-bold">
               CS
             </div>
@@ -456,8 +492,8 @@
     </div>
 
     <script>
-        // Gestion du formulaire de contact
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // Gestion du formulaire de contact avec API
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const submitBtn = this.querySelector('button[type="submit"]');
@@ -467,8 +503,21 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Envoi en cours...';
             submitBtn.disabled = true;
             
-            // Simulation d'envoi
-            setTimeout(() => {
+            try {
+                // Récupérer les données du formulaire
+                const formData = new FormData(this);
+                const contactData = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    subject: formData.get('subject') || 'Contact général',
+                    message: formData.get('message'),
+                    urgency: formData.get('urgency') || 'low',
+                    copy: formData.has('copy')
+                };
+
+                // Envoyer via l'API
+                await window.ubrApi.sendContactMessage(contactData);
+                
                 submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Message envoyé !';
                 submitBtn.classList.remove('bg-primary', 'hover:bg-blue-700');
                 submitBtn.classList.add('bg-green-500');
@@ -488,7 +537,21 @@
                     const charCount = document.querySelector('textarea[name="message"]').parentNode.querySelector('.text-sm');
                     if (charCount) charCount.textContent = '0/1000';
                 }, 3000);
-            }, 2000);
+            } catch (error) {
+                console.error('Erreur lors de l\'envoi:', error);
+                submitBtn.innerHTML = '<i class="fas fa-times mr-2"></i>Erreur !';
+                submitBtn.classList.remove('bg-primary');
+                submitBtn.classList.add('bg-red-500');
+                
+                showToast('Erreur lors de l\'envoi du message. Veuillez réessayer.', 'error');
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('bg-red-500');
+                    submitBtn.classList.add('bg-primary', 'hover:bg-blue-700');
+                }, 3000);
+            }
         });
 
         // Fonction pour afficher les toasts
@@ -656,5 +719,8 @@
             validateForm();
         });
     </script>
+    <!-- Scripts -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
 </body>
 </html>

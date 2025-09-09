@@ -17,7 +17,7 @@ class AuthController extends Controller
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => ['required', 'confirmed', Password::min(8)],
+            'password' => ['required', Password::min(8)],
             'dateOfBirth' => 'required|date|before:' . now()->subYears(config('app.min_age', 20))->format('Y-m-d'),
             'gender' => 'required|in:male,female',
             'city' => 'required|string|max:255',

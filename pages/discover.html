@@ -428,7 +428,18 @@
         </div>
     </div>
 
-    <!-- Importer le script de découverte -->
+    <!-- Scripts -->
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/modules/utils.js"></script>
     <script src="../assets/js/discover.js"></script>
+    <script>
+        // Vérifier l'authentification au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!window.authManager.requireAuth()) {
+                return;
+            }
+        });
+    </script>
 </body>
 </html>

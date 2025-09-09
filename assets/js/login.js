@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
 
-    function loginUser(email, password, remember) {
+    async function loginUser(email, password, remember) {
         // Afficher l'état de chargement
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
@@ -42,57 +42,28 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Connexion...';
         submitBtn.disabled = true;
 
-        // Appel à l'API d'authentification
-        fetch('http://localhost:5000/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(data => Promise.reject(data));
-            }
-            return response.json();
-        })
-        .then(data => {
+        try {
+            // Utiliser le gestionnaire d'authentification
+            const response = await window.authManager.login(email, password, remember);
+            
             // Connexion réussie
             submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Connexion réussie';
             submitBtn.classList.remove('bg-primary', 'hover:bg-blue-700');
             submitBtn.classList.add('bg-green-600', 'hover:bg-green-700');
             
-            // Stocker le token dans localStorage ou sessionStorage
-            if (remember) {
-                localStorage.setItem('userToken', data.token);
-                localStorage.setItem('userInfo', JSON.stringify({
-                    id: data._id,
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    email: data.email,
-                    isAdmin: data.isAdmin
-                }));
-            } else {
-                sessionStorage.setItem('userToken', data.token);
-                sessionStorage.setItem('userInfo', JSON.stringify({
-                    id: data._id,
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    email: data.email,
-                    isAdmin: data.isAdmin
-                }));
-            }
-            
             setTimeout(() => {
-                window.location.href = 'profile.html';
+                if (response.user.is_admin) {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'profile.html';
+                }
             }, 1000);
-        })
-        .catch(error => {
+        } catch (error) {
             // Échec de connexion
             console.error('Erreur de connexion:', error);
             showError(error.message || 'Email ou mot de passe incorrect.');
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
-        });
+        }
     }
 });
